@@ -11,6 +11,7 @@ rdoc
 brakeman-output.tabs
 rvm.env
 *.bak
+wiki
 *.wiki
 
 config/settings.local.yml
