@@ -4,6 +4,8 @@ require 'capistrano/ext/multistage'
 require "bundler/capistrano"
 # Load rvm-capistrano gem
 require "rvm/capistrano"
+# Include New Relic recipes
+require 'new_relic/recipes'
 
 set :ssh_options, {:forward_agent => true}
 set :app_title, "classes"

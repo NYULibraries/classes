@@ -5,7 +5,7 @@ class CatalogController < ApplicationController
   def index
     @class_categories = ClassCategory.visible
     @library_classes = LibraryClass.visible.in_order
-    @user = current_user#User.new
+    @user = (current_user) ? current_user : User.new
     
     @registration = Registration.new
     @suggestion = Suggestion.new
