@@ -5,7 +5,7 @@ class RegistrationMailer < ActionMailer::Base
   # Auto confirmation email after submission
   def confirmation_email(registrations)
     @response_email = ResponseEmail.find_by_purpose('auto_response')
-    body = format_email_classes(@response_email.body, registrations)
+    body = format_confirmation_email(@response_email.body, registrations)
     mail(:to => registrations.first.user.email, :subject => @response_email.subject, :reply_to => @response_email.reply_to, :body => body)
   end
   
@@ -29,6 +29,13 @@ class RegistrationMailer < ActionMailer::Base
   end
 
 private
+
+  # Wrap user and class formatting
+  def format_confirmation_email(body, registrations)
+    body = format_email_classes(body, registrations)
+    body = format_email_user_info(body, registrations.first.user)
+    return body.html_safe
+  end
    
   # Format classes for email
   def format_email_classes(body, registrations)
@@ -42,13 +49,16 @@ private
   
   # Format user information for email
   def format_email_user_info(body, user)
-    body.gsub!(/\%name/,user.name)
+    body.gsub!(/\%name/,user.fullname)
     body.gsub!(/\%email/,user.email)
     body.gsub!(/\%phone/,user.phone)
     body.gsub!(/\%program/,user.program)
     body.gsub!(/\%school/,user.school)
     body.gsub!(/\%status/,user.status)
-    body.gsub!(/\%suggestion/,Suggestion.where(:username => user.username).order("created_at").last.suggestion)
+    suggestion = Suggestion.where(:username => user.username).order("created_at").last
+    unless suggestion.nil?
+      body.gsub!(/\%suggestion/, suggestion.suggestion)
+    end
     return body
   end
   

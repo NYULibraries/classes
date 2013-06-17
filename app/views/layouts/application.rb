@@ -10,12 +10,8 @@ module Views
         meta << favicon_link_tag('https://library.nyu.edu/favicon.ico')
       end
       
-      def title
-        application_title
-      end
-      
-      def application
-        application_title
+      def application_title
+        t("application_title")
       end
       
       # Stylesheets to include in layout
@@ -30,8 +26,8 @@ module Views
             
       # Print breadcrumb navigation
       def breadcrumbs
-        #breadcrumbs = super
-        breadcrumbs = [link_to_unless_current(application_title, root_url)]
+        breadcrumbs = [link_to("NYU Libraries", "https://library.nyu.edu")]
+        breadcrumbs << link_to_unless_current(application_title, root_url)
         breadcrumbs << link_to("Admin", class_categories_path) if is_in_admin_view?
         breadcrumbs << link_to_unless_current(controller.controller_name.humanize) unless controller.controller_name == "catalog"
         return breadcrumbs

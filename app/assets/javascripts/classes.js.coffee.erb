@@ -18,6 +18,7 @@ $ ->
         data: $(this).closest("form").serializeArray(),
         success: (data, textStatus, jqXHR) ->
           $('#users_form').html(data)
+          $('#users_form').find("#user_fullname").focus()
     }
   
   # Sortable list of top-level categories

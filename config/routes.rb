@@ -3,6 +3,7 @@ Classes::Application.routes.draw do
   root :to => "catalog#index"
   
   post :create, :to => "catalog#create"
+  get :create, :to => "catalog#index"
   post "create_suggestion" => "catalog#create_suggestion"
   get "suggest" => "catalog#new_suggestion"
   post "autofill_user_fields" => "catalog#autofill_user_fields"

@@ -12,11 +12,6 @@ module ApplicationHelper
     catalog_javascripts = javascript_include_tag "application"
   end
   
-  # Application title
-  def application_title
-    t("application_title")
-  end
-  
   def format_class_date(class_date)
     "#{class_date.to_formatted_datetime} #{class_date.note} #{(class_date.cancelled?) ? '<span class="cancelled">Cancelled</span>' : ''} #{(class_date.is_full?) ? '<span class="full">Full</span>' : ''}".html_safe
   end
