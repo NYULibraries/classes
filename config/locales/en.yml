@@ -1,0 +1,109 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
+en:
+  application_title: Library Classes
+  footer_html: NYU Division of Libraries. 
+  suggestions:
+    flash:
+      create:
+        notice: 'Suggestion was successfully submitted.' 
+      update:
+        notice: 'Suggestion was successfully updated.'
+      destroy:
+        notice: 'Suggestion was successfully deleted.'
+  library_classes:
+    flash:
+      create:
+        notice: 'Library class was successfully created.'
+      update:
+        notice: 'Library class was successfully updated.'
+      destroy:
+        notice: 'Library class was successfully deleted.'
+  application_details:
+    flash:
+      update:
+        notice: 'Application detail successfully updated.'
+  catalog:
+    flash:
+      create:
+        notice: "You successfully registered for this class. Expect a confirmation e-mail."
+        error: 'Please select at least one class.'
+      create_suggestion:
+        notice: 'Thanks for your suggestion.'
+  registrations:
+    flash:
+      destroy:
+        notice: "Registration was successfully deleted."
+      update:
+        notice: "Registration was successfully updated."
+  class_categories:
+    flash:
+      create:
+        notice: "Category successfully created."
+      update:
+        notice: "Category successfully updated."
+      destroy:
+        notice: "Category successfully deleted."
+  class_sub_categories:
+    flash:
+      create:
+        notice: 'Sub category was created successfully' 
+        error: "Sub category title can't be blank"
+      update:
+        notice: "Sub category was successfully updated."
+      destroy:
+        notice: "Sub category was successfully deleted."
+  class_dates:
+    flash:
+      create:
+        notice: "Class date was successfully created." 
+        error: "Class date couldn't be saved. Check that all required fields are filled in."
+      update:
+        notice: "Class date was successfully updated."
+      destroy:
+        notice: "Class date was successfully deleted."
+      send_follow_up:
+        notice: "Follow up e-mail sent."
+  response_emails:
+    flash:
+      update:
+        notice: 'Response e-mail was successfully updated.' 
+  users:
+    flash:
+      update: 
+        notice: 'User was successfully updated.'
+      destroy:
+        notice: 'User was successfully deleted.'
+        error: 'User could not be deleted.'
+    schools:
+      - 'College of Arts & Sciences'
+      - Courant
+      - Gallatin
+      - Institute of Fine Arts
+      - Nursing
+      - Wagner
+      - GSAS
+      - SCPS
+      - Social Work
+      - Steinhardt (Education)
+      - Stern (Business)
+      - Tisch (Arts)
+      - Other
+    statuses:
+      - Junior / Senior
+      - Masters
+      - Doctoral
+      - Faculty
+      - Administrator
+      - Staff
+      - Visiting Scholar
+      - Other
+    wherefroms:
+      - Professor
+      - Fellow student
+      - NYU Libraries website
+      - Flyer/poster
+      - Tweet
+      - Facebook
+      - Other 

@@ -1,0 +1,8 @@
+<%= simple_form_for @class_category do |f| %>
+	<%= f.input :title %>
+	<%= f.input :external, :hint => "If a category is marked 'external' it will display as a link to another page with only its class listings." %>
+	<%= f.input :url, :placeholder => "optional", :hint => "Not valid if external is checked." %>
+	<%= f.input :head_text, :label => "Category header text", :placeholder => "optional", :hint => "This text will appear before the category listing", as: :text, :input_html => { :rows => 3 }%>
+	<%= f.input :foot_text, :label => "Category footer text", :placeholder => "optional", :hint => "This text will appear after the category listing", as: :text, :input_html => { :rows => 3 }%>
+	<%= f.submit "Save" %>
+<% end %>

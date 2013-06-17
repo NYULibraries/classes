@@ -1,0 +1,54 @@
+<p><%= page_entries_info @suggestions %></p>
+
+<%= paginate @suggestions, :theme => "bootstrap" %>
+
+<div class="btn-group">
+  <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+    Action
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu">
+    <li><%= link_to suggestions_url(:format => :csv) do %><i class="icon-download-alt"></i> Download as CSV<% end -%></li>
+  </ul>
+</div>
+
+<div class="btn-group">
+  <a class="btn btn-danger dropdown-toggle" data-toggle="dropdown" href="#">
+    Delete
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu">
+    <li><%= link_to clear_suggestions_url, :data => {:confirm => 'This will delete all suggestions and cannot be undone. Are you sure?'} do %><i class="icon-ban-circle"></i> Clear all suggestions<% end -%></li>
+  </ul>
+</div>
+
+<br /><br />
+
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th><%= link_to_sorted "Date submitted", 'created_at' %></th>
+			<th><%= link_to_sorted "Name", "fullname" %></th>
+			<th><%= link_to_sorted "Username", "username" %></th>
+			<th><%= link_to_sorted "Email", "email" %></th>
+			<th>Suggestion</th>
+			<th>Options</th>
+		</tr>
+	</thead>
+	<tbody>
+	<% @suggestions.each do |suggestion| %>
+		<tr>
+			<td><%=h suggestion.created_at.to_date.to_s %></td>
+			<td><%=h suggestion.fullname %></td>
+			<td><%= link_to_user(suggestion.username) %></td>
+			<td><%=h suggestion.email %></td>
+			<td><%=h suggestion.suggestion %></td>
+			<td><%= link_to 'Show', suggestion %></td>
+			<td><%= link_to 'Edit', edit_suggestion_path(suggestion) %></td>
+			<td><%= link_to 'Destroy', suggestion, :confirm => 'Are you sure?', :method => :delete %></td>
+		</tr>
+	<% end %>
+	</tbody>
+</table>
+
+<%= paginate @suggestions, :theme => "bootstrap" %>

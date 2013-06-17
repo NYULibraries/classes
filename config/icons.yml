@@ -1,0 +1,6 @@
+# Map sprite names to common functions
+# Usage:
+#   <%= icon_tag :email %>
+# Generated HTML:
+#   <i class="icons-famfamfam-email_go"></i>
+email: 'icons-famfamfam-email_go'

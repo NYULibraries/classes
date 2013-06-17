@@ -1,0 +1,7 @@
+<%= simple_form_for(@response_email, :html => {:class => '' }) do |f| %>
+	<%= f.input :reply_to %>
+	<%= f.input :subject %>
+	<%= f.input :body, as: :text, hint: available_tokens %>
+	<%= f.input :purpose, as: :hidden, :input_html => { :readonly => true } %>
+	<%= f.button :submit, "Save" %>
+<% end %>

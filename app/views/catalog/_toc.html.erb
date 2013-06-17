@@ -1,0 +1,32 @@
+<li>
+	<h2><%= link_to_external_list_or_url(class_category)%></h2>
+	
+	<%= simple_format(sanitize(class_category.head_text, :tags => %w(b strong i em br p a))) %> 
+	
+	<% unless class_category.class_sub_categories.empty? %>
+		<ul>
+			<% class_category.class_sub_categories.visible.each do |class_sub_category| %>
+			<li>
+				<h3><%= link_to_if(class_sub_category.url?, class_sub_category.title, class_sub_category.url)%></h3>
+				<ul>
+					<% class_sub_category.library_classes.visible.each do |library_class|%>
+					<li>
+						<%= link_to library_class.title_sanitized, :anchor => library_class.title.parameterize %>
+					</li>
+					<% end -%>	
+				</ul>
+			</li>	
+			<% end -%>
+		</ul>
+	<% end -%>
+	
+	<ul>
+		<% class_category.library_classes.without_sub_category.visible.each do |library_class| %>
+		<li>
+		<%= link_to library_class.title_sanitized, :anchor => library_class.title.parameterize %>
+		</li>	
+		<% end -%>
+	</ul>
+
+	<%= content_tag(:div, simple_format(sanitize(class_category.foot_text, :tags => %w(b strong i em br p a))), :class => "category_footer") %> 
+</li>

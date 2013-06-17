@@ -1,0 +1,59 @@
+<div class="page_container">
+	<% [@user, @registration].each do |type| %>
+		<% if type.errors.any? %>  
+			<div id="error_explanation" class="alert alert-error">  
+				<h2><%= pluralize(type.errors.count, "error") %> prohibited this record from being saved:</h2>  
+					<ul>  
+					<% type.errors.full_messages.each do |msg| %>  
+						<li><%= msg %></li>  
+					<% end %>  
+				</ul>  
+				<a href="#form">Jump to form</a>
+			</div>  
+		<% end %>
+	<% end %>
+
+	<h1><%= get_formatted_detail('application_title')%></h1>
+
+	<p><%= get_formatted_detail('application_head_text')%></p>
+
+	<%= simple_form_for @registration, :url => { :controller => "catalog", :action => :create } do |f| %>
+		<div class="classes_container frontend">
+			<ul id="toc">
+				<% @class_categories.each do |class_category| %>
+					<%= render :partial => 'catalog/toc', :locals => { :class_category => class_category } %>
+				<%	end %>
+			</ul>
+			<p class="suggest">
+				<%= link_to 'Suggest a Class', suggest_path %></a>
+			</p>
+		</div>
+
+		<div id="full_classes">
+		<%= simple_fields_for @registration do |reg| %>
+			<% @library_classes.each do |library_class| %>
+			 <%= render :partial => 'library_class', :locals => { :library_class => library_class, :reg => reg }%>
+			<% end %>
+		<% end %>
+		</div>
+    	
+		<div id="form">
+			<a name="form"></a>
+			<%= get_formatted_detail('application_form_text','class_bottom_text')%>
+			<div id="users_form">
+				<%= render :partial => 'user', :locals => { :f => f } %>
+			</div>
+		</div>
+		
+		<div id="suggest">
+			<a name="suggest"></a>
+			<%= render :partial => 'new_suggestion' %>
+		</div>
+    	
+		<p>
+		<%= f.submit "Submit" %>
+		</p>
+		
+	<% end %>
+
+</div>

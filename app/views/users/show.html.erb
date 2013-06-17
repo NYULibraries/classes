@@ -1,0 +1,48 @@
+<p>
+  <b>Name:</b>
+  <%=h @user.fullname %>
+</p>
+
+<p>
+  <b>Username:</b>
+  <%=h @user.username %>
+</p>
+
+<p>
+  <b>Email:</b>
+  <%=h @user.email %>
+</p>
+
+<p>
+  <b>Phone:</b>
+  <%=h @user.phone %>
+</p>
+
+<p>
+  <b>Program:</b>
+  <%=h @user.program %>
+</p>
+
+<p>
+  <b>School:</b>
+  <%=h @user.school %>
+</p>
+
+<p>
+  <b>Status:</b>
+  <%=h @user.status %>
+</p>
+
+<p>
+  <b>How did you find out about the classes NYU Libraries offers?</b>
+  <%=h @user.wherefrom %>
+</p>
+
+<h3>Registrations:</h3>
+
+<div class="user_registrations">
+<%= render "registrations" %>
+</div>
+
+<%= icon_tag :edit %><%= link_to 'Edit', edit_user_path(@user) %> |
+<%= icon_tag :back %><%= link_to 'Back', users_path %>

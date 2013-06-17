@@ -1,0 +1,10 @@
+<%= simple_form_for(@library_class) do |f| %>
+	<%= f.input :title %>
+	<%= f.input :class_category_id, prompt: "Select a category", as: :select, collection: @class_categories.map {|x| [strip_tags(x.title), x.id] }  %>
+	<%= f.input :class_sub_category_id, as: :select, collection: @class_sub_categories.map {|x| [strip_tags(x.title), x.id] } %>
+	<%= f.input :description, as: :text, :input_html => { :rows => 10 }, :hint => "HTML tags allowed: p, br, a, strong, em." %>
+	<%= f.input :location %>
+	<%= f.input :registration, as: :boolean, :label => "Registration required?" %>
+	<%= f.input :alt_registration_text, as: :text, :input_html => { :rows => 10 }, :label => "Alternative registration text", :placeholder => "Default: Registration required. Select a date from this  list then fill out the form on the bottom of the page." %>
+	<%= f.submit "Save" %>
+<% end %>

@@ -1,0 +1,152 @@
+@import "nyulibraries";
+
+body {
+  padding-top: 0;
+}
+
+.q {
+  padding-top: 6px !important;
+  padding-bottom: 6px !important;
+  line-height: 20px !important;
+}
+
+.class_registration, .class_location, .class_bottom_text {
+	font-style: italic;
+	&.class_bottom_text {
+	  margin-top: 10px;
+	}
+}
+
+.full_class {
+	border-bottom: 1px solid #e8e8e8;
+	li {
+	  background-image: none;
+    margin-bottom: 5px;
+    list-style: none;
+    input[type='radio'] { 
+      margin-top: 0;
+    }
+  }
+}
+
+fieldset {
+  border: 1px solid #e0e0e0;
+  padding:  10px;
+  margin-bottom: 10px;
+  legend { width: auto; }
+}
+
+label { margin-left: 0; }
+
+.categories_list {
+  ul li { list-style: none; }
+}
+
+.category_footer {
+  margin-top: 10px;
+}
+
+fieldset {
+	max-width: 450px;
+	margin-left: 0;
+}
+
+p.suggest {
+	font-size: 15px;
+	text-align: center;
+	margin-top: 20px;
+}
+
+div.page_container {
+	max-width:500px;
+}
+
+.categories_list ul li, .categories_list  li {
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
+.btn-small { padding: 0; }
+
+h3 {
+  font-size: 100%;
+}
+
+h4 {
+  font-size: 100%;
+}
+
+.tiny_form {
+  * { margin: 0; }
+}
+
+.classes_container {
+  h2 {
+    color: #8E2323;
+  }
+  > ul { 
+    margin-left: 0;
+    list-style: none; 
+  }
+  max-width: 500px;
+	border: 1px solid #e8e8e8;
+	border-bottom: 2px solid #ccc !important;
+	padding: 10px;
+}
+
+ul#toc {
+  margin-left: 10px;
+  ul, li {
+    margin-left: 0;
+    list-style: none;
+  }
+  li {
+    padding: 3px 0;
+  }
+}
+
+span.cancelled {
+	font-weight: bold;	
+	color: #ff0000;
+}
+
+span.full {
+	font-weight: bold;	
+	color: #0000ff;
+}
+
+// simple_form required field
+abbr[title=required] {
+  border-bottom: none;
+  color: red;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+// This hack makes simple_form and Twitter Bootstrap form-inline play nice
+.form-inline div {
+  display: inline;
+  label { margin-right: 5px; }
+}
+
+.class_date_item {
+  margin-left: 20px;
+  input[type="radio"] { margin-top: 0; }
+  label {margin: 0 auto;}
+  margin-bottom: 10px;
+}
+
+#users_form, #suggest {
+  fieldset > legend + div { margin-top:0; }
+}
+
+textarea#response_email_body { width: 80%; }
+
+.ui-state-highlight {
+  border: 5px dotted #efefef;
+}
+
+.toggle_all {
+  * { float:left; }
+  label { margin: 3px; }
+}

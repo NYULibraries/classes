@@ -1,0 +1,82 @@
+$ ->
+  # Hide elements for no js 
+  $('.js_hide').hide()
+  
+  # Initialize best_in_place gem JS
+  $('.best_in_place').best_in_place()
+  
+  # Toggle chevron icon for accordian category dropdowns
+  # This doesn't care if they're actually open or closed, it's just a lazy visual method
+  $('.collapser').click ->
+    $(this).find("i").toggleClass "icon-chevron-right icon-chevron-down"
+  
+  # Autocomplete user form when the username has been filled out
+  $('#users_form').on 'blur', '#user_username', -> 
+    $.ajax {
+        type: 'POST',
+        url: '<%= Rails.application.routes.url_helpers.autofill_user_fields_path %>.js',
+        data: $(this).closest("form").serializeArray(),
+        success: (data, textStatus, jqXHR) ->
+          $('#users_form').html(data)
+    }
+  
+  # Sortable list of top-level categories
+  $('ul.categories_list').sortable { 
+    handle: "h2"
+    stop: (event, ui) ->
+      $.ajax {
+        type: 'POST',
+        url: '<%= Rails.application.routes.url_helpers.class_categories_sort_path %>.js',
+        data: $(this).sortable('serialize')
+      }
+    opacity: 0.4
+    cursor: 'move'
+    placeholder: "ui-state-highlight"
+  }
+  
+  # Sortable list of second-level sub-categories
+  $('ul.sub_categories_list').sortable { 
+    handle: "h3"
+    stop: (event, ui) ->
+      $.ajax {
+        type: 'POST',
+        url: '<%= Rails.application.routes.url_helpers.class_sub_categories_sort_path %>.js',
+        data: $(this).sortable('serialize')
+      }
+    opacity: 0.4
+    cursor: 'move'
+    placeholder: "ui-state-highlight"
+  }
+  
+  # Sortable list of classes, both in sub-categories and categories
+  $('ul.classes_list').sortable { 
+    handle: "h4"
+    stop: (event, ui) ->
+      $.ajax {
+        type: 'POST',
+        url: '<%= Rails.application.routes.url_helpers.library_classes_sort_path %>.js',
+        data: $(this).sortable('serialize')
+      }
+    opacity: 0.4
+    cursor: 'move'
+    placeholder: "ui-state-highlight"
+  }
+  
+  # Change sub categories select when category is selected
+  $(document).on 'change', "#new_library_class select[name='library_class[class_category_id]'], #edit_library_class select[name='library_class[class_category_id]']", ->
+    $.ajax {
+        method: $(this).closest("form").attr("method"),
+        url: $(this).closest("form").attr("action") + ".js",
+        data: $(this).closest("form").serialize()
+    }
+  
+  # Toggle all click
+  $(':checkbox[name=toggle_all]').click ->
+    $(':checkbox[name="registration[attended]"]').prop('checked', this.checked)
+    $("form[data-remote=true]").submit()
+  
+  # Submit remote form when checkbox is changed
+  $("form[data-remote=true]").find("input[type='submit']").hide()
+  $("form[data-remote=true]").on 'change', ":checkbox", ->
+    $(this).closest("form").submit()
+  

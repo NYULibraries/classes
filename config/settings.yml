@@ -1,0 +1,19 @@
+# Default public settings
+  
+databases: 
+  password: 
+  username: root
+  database: nyu_classes_test
+  host: localhost
+
+login:
+  default_admins: ["real_user"]
+  pds_url: 
+  calling_system: 
+    
+# A dummy secret token for dev sessions and public consumption 
+
+secret_token: 'eb7aded9f022e3ed276ab7044a15656ed032d677a3db9d1d609e86d9391209ada8719965dce712d317b98583e101ce58346be8442f37299c1a6f2dea6e37b338'
+  
+cookie: 
+  domain: ".local"

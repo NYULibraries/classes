@@ -1,0 +1,8 @@
+<%= simple_form_for(@class_sub_category, :html => { :class => 'form form-inline' }) do |f| %>
+	<%= f.input :title %>
+	<%= f.input :url, :placeholder => "optional" %>
+	<%= f.input :class_category_id, as: :hidden, input_html: { value: @class_category.id } %>
+	<%= f.submit "Save" %>
+<% end %>
+
+

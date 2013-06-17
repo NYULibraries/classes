@@ -1,0 +1,12 @@
+<% if is_admin? %>
+<div class="sidebar-section">
+    <h2>Admin Panel</h2>
+    <ul class="admin_options">
+		<li><%= link_to "Manage Categories", class_categories_path %></li>
+		<li><%= link_to "Manage Classes", library_classes_path %></li>
+		<li><%= link_to "Manage Response E-mails", response_emails_path %></li>
+		<li><%= link_to "Manage Users", users_path %></li>
+		<li><%= link_to "View Class Suggestions", suggestions_path %></li>
+    </ul>
+</div>
+<% end %>

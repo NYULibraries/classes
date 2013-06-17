@@ -1,0 +1,39 @@
+<div class="full_class">
+	
+	<a name="<%=library_class.title.parameterize%>"></a>
+	<h3><%=h library_class.title %></h3>
+	
+	<p class="class_description"><%= simple_format(sanitize(library_class.description, :tags => %w(b strong i em br p a))) %> </p>
+	
+	<% unless library_class.class_dates.empty?%>
+		<% library_class.class_dates.each do |class_date| %>
+			<% if library_class.registration?%>
+			<%= reg.input :class_date, label: false, as: :radio_buttons, collection: [class_date].map {|x| [format_class_date(x), x.id]}, input_html: { :disabled => class_date.is_disabled?, :name => "class_date[#{library_class.id}]"}, wrapper_html: { :class => "class_date_item" } %>
+			<% else %>
+			<div class="class_date_item">
+			<%= format_class_date(class_date) %>
+			</div>
+			<% end -%>
+		<% end %>
+	<% end %>
+	
+	<% if library_class.location? %>
+		<p class="class_location">
+			<%=h library_class.location %>
+		</p>
+	<% end %>
+	
+	<p class="class_registration">
+		<% if library_class.registration? %>
+			<% if library_class.alt_registration_text? %>
+				<%= simple_format(sanitize(library_class.alt_registration_text, :tags => %w(b strong i em br p a))) %> 
+			<% else %>
+				Registration required. Select a date from this list then <a href="#form">fill out the form</a> on the bottom of the page.
+			<% end %>
+		<% else %>
+			Walk-in session, no registration required.
+		<% end %>
+	</p>
+	
+	<p><a href="#top"><i class="icon-chevron-up"></i>Back to top</a>
+</div>

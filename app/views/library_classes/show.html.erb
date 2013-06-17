@@ -1,0 +1,43 @@
+<p>
+  <b>Title:</b>
+  <%=h strip_tags(@library_class.title.html_safe) %>
+</p>
+
+<p>
+  <b>Category:</b>
+  <%=h strip_tags(@library_class.class_category.title) %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= simple_format(sanitize(@library_class.description, :tags => %w(b strong i em br p a))) %> 
+</p>
+
+<p>
+  <b>Location:</b>
+  <%=h @library_class.location %>
+</p>
+
+<p>
+  <b>Registration:</b>
+  <%=h @library_class.registration %>
+</p>
+
+<p>
+  <b>Alternative registration text:</b>
+  <%= simple_format(sanitize(@library_class.alt_registration_text, :tags => %w(b strong i em br p a))) %> 
+</p>
+
+<div id="dates_display">
+	<h3>Dates:</h3>
+	<%= render :partial => "class_dates/index" %>
+</div>
+
+<div id="date_form"></div>
+
+<div class="new_class_date well well-small">
+<%= render "class_dates/new" %>
+</div>
+
+<%= icon_tag :edit %> <%= link_to 'Edit', edit_library_class_path(@library_class) %> |
+<%= icon_tag :back %> <%= link_to 'Back', library_classes_path %>

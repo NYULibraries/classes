@@ -1,0 +1,19 @@
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th>Class name</th>
+			<th>Class date</th>
+		</tr>
+	</thead>
+	<tbody>
+	<% @user.registrations.each do |registration| %>
+		<tr>
+			<td><%= link_to(registration.class_date.library_class.title, registration.class_date.library_class) %></td>
+			<td><%= link_to(registration.class_date.to_formatted_datetime, registration.class_date) %></td>
+			<td><%= link_to 'Destroy', { :controller => "users", :action => "destroy_registration", :id => registration.id }, :confirm => 'Are you sure?', :method => :delete %></td>
+		</tr>
+	<% end %>
+	</tbody>
+</table>
+
+<br />

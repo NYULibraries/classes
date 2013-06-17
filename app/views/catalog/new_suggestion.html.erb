@@ -1,0 +1,15 @@
+<h1>Suggest a Class</h1>
+
+<div class="page_container">
+	<p>* Please let us know the type of classes you'd like for us to offer in the future (include your e-mail address if you'd like a response):</p>
+	
+	<%= simple_form_for @suggestion, :url => {:controller => "catalog", :action => "create_suggestion"} do |f| %>
+		<fieldset>
+			<%= f.input :fullname, label: 'Name' %>
+			<%= f.input :email, placeholder: 'user@nyu.edu' %>
+			<%= f.input :suggestion, as: :text, :input_html => { :rows => 3 } %>
+			<%= f.button :submit, "Suggest" %>
+		</fieldset>
+	<% end %>
+
+</div>

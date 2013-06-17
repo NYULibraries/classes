@@ -1,0 +1,6 @@
+<%= simple_form_for @suggestion do |f| %>
+	<%= f.input :fullname, label: 'Name' %>
+	<%= f.input :email, placeholder: 'user@nyu.edu' %>
+	<%= f.input :suggestion, as: :text, :input_html => { :rows => 3 } %>
+	<%= f.button :submit, "Suggest" %>
+<% end %>

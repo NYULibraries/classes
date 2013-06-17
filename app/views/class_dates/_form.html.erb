@@ -1,0 +1,8 @@
+<%= simple_form_for(@class_date, :html => { :class => 'form form-horiztonal' }) do |f| %>
+	<%= f.input :the_date, label: "Date/time", as: :datetime, input_html: { :class => "input-small" } %>
+	<%= f.input :note %>
+	<%= f.input :capacity, input_html: { maxlength: 3 } %>
+	<%= f.input :instructors, label: "Instructors e-mails", placeholder: "comma-delimited" %>
+	<%= f.association :library_class, as: :hidden, input_html: { :value => @library_class.id } %>
+	<%= f.submit "Save" %>
+<% end %>

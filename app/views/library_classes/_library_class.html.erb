@@ -1,0 +1,9 @@
+<%= content_tag_for :li, library_class do %>
+	<h4><%= (library_class.is_visible?) ? library_class.title_sanitized : content_tag(:span, :class => "muted") { "#{library_class.title_sanitized} (inactive)" } %></h4>
+	<div class="actions">
+	<%= link_to 'Show', library_class %> |
+	<%= link_to 'Edit', edit_library_class_path(library_class) %> |
+	<%= link_to 'Destroy', library_class, :confirm => 'Are you sure?', :method => :delete, :remote => true %> |
+	<%= link_to "#{(library_class.is_visible?) ? 'Hide' : 'Reveal' }", library_class_path(library_class, params.merge(:library_class => {:visible => !library_class.visible})), :method => :put,  :class => "toggle_visible", :remote => true %>
+	</div>
+<% end -%>

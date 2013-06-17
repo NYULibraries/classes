@@ -1,0 +1,34 @@
+<p>
+  <b>Title:</b>
+  <%=h @class_category.title_sanitized %>
+</p>
+<p>
+  <b>External:</b>
+  <%=h @class_category.external %>
+</p>
+<p>
+  <b>URL:</b>
+  <%=h @class_category.url %>
+</p>
+<p>
+  <b>Header text:</b>
+  <%= simple_format(sanitize(@class_category.head_text, :tags => %w(b strong i em br p a))) %> 
+</p>
+<p>
+  <b>Footer text:</b>
+  <%= simple_format(sanitize(@class_category.foot_text, :tags => %w(b strong i em br p a))) %> 
+</p>
+
+<p>
+  <b>Sub categories:</b>
+  <div id="class_sub_categories">
+  <%= render "class_sub_categories" %>
+  </div>
+</p>
+
+<div class="new_sub_categeory well well-small">
+<%= render "class_sub_categories/new" %>
+</div>
+
+<%= icon_tag :edit %> <%= link_to 'Edit', edit_class_category_path(@class_category) %> |
+<%= icon_tag :back %> <%= link_to 'Back', class_categories_path %>

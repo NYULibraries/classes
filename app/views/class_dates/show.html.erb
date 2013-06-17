@@ -1,0 +1,35 @@
+<h1>Listing registrations</h1>
+
+<dl>
+	<dt>Class title:</dt>
+	<dd><%=h @class_date.library_class.title %></dd>
+	
+	<dt>Class date:</dt>
+	<dd><%= @class_date.to_formatted_datetime %></dd>
+	
+	<dt>Capacity:</dt>
+	<dd><%= @class_date.capacity %></dd>
+	
+	<dt>Instructors e-mails:</dt>
+	<dd><%= @class_date.instructors %></dd>
+	
+	<dt>Registrations:</dt>
+	<dd>
+		<div id="user_registrations">
+		<%= render "registrations" %>
+		</div>
+	</dd>
+
+	<%= icon_tag :email %><button class="btn btn-link btn-small" data-toggle="collapse" data-target="#follow_up_email">Send follow-up e-mail</button>
+</p>
+
+<div class="collapse out" id="follow_up_email">
+	<div class="well well-small">
+		<%= render "follow_up_email", :class_date => @class_date %>
+	</div>
+</div>
+
+<br />
+
+<%= icon_tag :edit %><%= link_to 'Edit', edit_class_date_path(@class_date) %> |
+<%= icon_tag :back %><%= link_to 'Back', @class_date.library_class %>

@@ -1,0 +1,34 @@
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th>User</th>
+			<th>Name</th>
+			<th>Email</th>
+			<th>Program</th>
+			<th>Status</th>
+			<th>Date registered</th>
+			<th>Attended<br />
+				<span class="toggle_all"><%= check_box_tag :toggle_all, :toggle_all %> <%= label_tag :toggle_all, "All" %></span></th>
+			<th>Options</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% @class_date.registrations.each do |reg| %>
+		<tr>
+			<td><%= link_to(reg.user.username, reg.user) %></td>
+			<td><%= reg.user.fullname %></td>
+			<td><%= reg.user.email %></td>
+			<td><%= reg.user.program %></td>
+			<td><%= reg.user.status %></td>
+			<td><%= reg.created_at.to_formatted_s(:db) %></td>
+			<td>
+			<%= simple_form_for(reg, :html => {:class => "form-inline tiny_form"}, :remote => true) do |f| %>
+			<%= f.input :attended, as: :boolean, :label_html => { :class => "checkbox inline"}, :input_html => { :checked => reg.was_attended? } %>
+			<%= f.submit "Save" %>
+			<% end -%>
+			</td>
+			<td><%= link_to "Destroy", reg, confirm: "Are you sure?", method: :delete %></td>
+		</tr>
+		<% end -%>
+	</tbody>
+</table>

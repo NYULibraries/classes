@@ -1,0 +1,32 @@
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th>Date/Time</th>
+			<th>Note</th>
+			<th>Capacity</th>
+			<th>Instructors</th>
+			<th>Registrations</th>
+			<th>Flags</th>
+		</tr>
+	</thead>
+	<tbody>
+	<% @library_class.class_dates.each do |class_date| %>
+		<tr>
+			<td><%= class_date.to_formatted_datetime %></td>
+			<td><%=h class_date.note %></td>
+			<td><%=h class_date.capacity %></td>
+			<td><%=h class_date.instructors %></td>
+			<td><%= link_to class_date.registrations.count, class_date %><br /><%= content_tag(:span, "Full", :class => "full") if class_date.is_full? %></td>
+			<td>
+			<%= simple_form_for(class_date, :html => {:class => "form-inline tiny_form"}, :remote => true) do |f| %>
+			<%= f.input :cancelled, as: :boolean, :label_html => { :class => "checkbox inline"}, :input_html => { :checked => class_date.is_cancelled? } %>
+			<%= f.submit "Save" %>
+			<% end -%>
+			</td>
+			<td><%= link_to 'Show', class_date %></td>
+			<td><%= link_to 'Edit', edit_class_date_path(class_date) %></td>
+			<td><%= link_to 'Destroy', class_date, :confirm => 'Are you sure?', :method => :delete %></td>
+		</tr>
+	<% end %>
+	</tbody>
+</table>

@@ -1,0 +1,22 @@
+<p>
+  <b>Name:</b>
+  <%=h @suggestion.fullname %>
+</p>
+
+<p>
+  <b>Username:</b>
+  <%= link_to_user(@suggestion.username) %>
+</p>
+
+<p>
+  <b>Email:</b>
+  <%=h @suggestion.email %>
+</p>
+
+<p>
+  <b>Suggestion:</b>
+  <%=h @suggestion.suggestion %>
+</p>
+
+<%= icon_tag :edit %> <%= link_to 'Edit', edit_suggestion_path(@suggestion) %> |
+<%= icon_tag :back %> <%= link_to 'Back', suggestions_path %>
