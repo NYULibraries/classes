@@ -14,7 +14,7 @@ $ ->
   $('#users_form').on 'blur', '#user_username', -> 
     $.ajax {
         type: 'POST',
-        url: '<%= ActionController::Base.relative_url_root %>/autofill_user_fields.js" %>',
+        url: '<%= ActionController::Base.relative_url_root %>/autofill_user_fields.js',
         data: $(this).closest("form").serializeArray(),
         success: (data, textStatus, jqXHR) ->
           $('#users_form').html(data)

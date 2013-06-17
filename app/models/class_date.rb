@@ -4,9 +4,8 @@ class ClassDate < ActiveRecord::Base
 	validates_presence_of :the_date, :library_class_id, :capacity
 	validates_numericality_of :capacity, :on => :create, :only_integer => true
 	validates :instructors,
-      :allow_blank => false,
-      :length => {:minimum => 1, :maximum => 254},
-      :format => {:with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i}
+      :allow_blank => true,
+      :format => {:with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})(,(\s)*([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,}))+\z/i}
 		
 	belongs_to :library_class
 	has_many :registrations, :dependent => :destroy
