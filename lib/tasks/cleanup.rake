@@ -6,5 +6,5 @@ namespace :cleanup do
       destroyed = User.destroy_all(["last_request_at IS NOT NIL AND last_request_at < ?", 1.year.ago])
       @log.error "[#{Time.now.to_formatted_s(:db)}] #{destroyed.count} users destroyed"
     end
-    
+  
 end

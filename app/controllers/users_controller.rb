@@ -44,12 +44,18 @@ class UsersController < ApplicationController
     respond_with(@user)
   end
 
-  # DELETE /
+  # DELETE /users/destroy_registration/1
   def destroy_registration
     @registration = Registration.find(params[:id])
     @user = @registration.user
     flash[:notice] = t("registrations.flash.destroy.notice") if @registration.destroy
     respond_with(@registration, :location => @user)
+  end
+  
+  # DELETE /users/destroy_all
+  def clear_users
+    flash[:notice] = "Cleared all inactive non-admin users." if User.non_admin.inactive.destroy_all
+    redirect_to users_url
   end
   
 end

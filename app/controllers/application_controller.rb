@@ -20,7 +20,7 @@ class ApplicationController < ActionController::Base
   def current_user_dev
    @current_user ||= User.find_by_username("ba36")
   end
-  #alias :current_user :current_user_dev if Rails.env == "development"
+  alias :current_user :current_user_dev if Rails.env == "development"
 
   # Return true if user is marked as admin
   def is_admin

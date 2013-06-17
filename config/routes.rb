@@ -9,6 +9,14 @@ Classes::Application.routes.draw do
   post "autofill_user_fields" => "catalog#autofill_user_fields"
   
   scope "admin" do
+    post "class_dates/send_follow_up", :to => "class_dates#send_follow_up", :as => :send_follow_up
+    delete "suggestions/destroy_all", :to => "suggestions#clear_suggestions", :as => :clear_suggestions
+    delete "clear_users", :to => "users#clear_users"
+    delete "destroy_registration", :to => "users#destroy_registration"
+    match "populate_sub_categories_select", :to => "library_classes#populate_sub_categories_select", :via => [:post, :put]
+    post "class_categories_sort", :to => "class_categories#sort"
+    post "class_sub_categories_sort", :to => "class_sub_categories#sort"
+    post "library_classes_sort", :to => "library_classes#sort"
     resources :library_classes do 
       post :sort, on: :collection
     end
@@ -24,14 +32,6 @@ Classes::Application.routes.draw do
     resources :response_emails
     resources :application_details
     resources :suggestions
-    post "send_follow_up", :to => "class_dates#send_follow_up"
-    post "clear_suggestions", :to => "suggestions#clear_suggestions"
-    post "clear_users", :to => "users#clear_users"
-    match "populate_sub_categories_select", :to => "library_classes#populate_sub_categories_select", :via => [:post, :put]
-    delete "destroy_registration", :to => "users#destroy_registration"
-    post "class_categories_sort", :to => "class_categories#sort"
-    post "class_sub_categories_sort", :to => "class_sub_categories#sort"
-    post "library_classes_sort", :to => "library_classes#sort"
   end
   
   match 'login', :to => 'user_sessions#new', :as => :login

@@ -54,9 +54,8 @@ class SuggestionsController < ApplicationController
   
   # Destroy all suggestions
   def clear_suggestions
-    Suggestion.destroy_all
-    @suggestions = Suggestion.all
-    respond_with(@suggestions)
+    flash[:notice] = "Cleared all suggestions." if Suggestion.destroy_all
+    redirect_to suggestions_url
   end
   
 end

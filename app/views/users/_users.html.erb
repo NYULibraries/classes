@@ -18,7 +18,7 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu">
-    <li><%= link_to clear_users_url, :data => {:confirm => 'This will delete all users without registrations and cannot be undone. Are you sure?'} do %><i class="icon-ban-circle"></i> Clear all inactive users<% end -%></li>
+    <li><%= link_to clear_users_url, :data => {:confirm => 'This will delete all users without registrations and cannot be undone. Are you sure?'}, :method => :delete do %><i class="icon-ban-circle"></i> Clear all inactive users<% end -%></li>
   </ul>
 </div>
 

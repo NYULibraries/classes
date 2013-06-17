@@ -14,7 +14,7 @@ $ ->
   $('#users_form').on 'blur', '#user_username', -> 
     $.ajax {
         type: 'POST',
-        url: '<%= Rails.application.routes.url_helpers.autofill_user_fields_path %>.js',
+        url: '<%= ActionController::Base.relative_url_root %>/autofill_user_fields.js" %>',
         data: $(this).closest("form").serializeArray(),
         success: (data, textStatus, jqXHR) ->
           $('#users_form').html(data)
@@ -27,7 +27,7 @@ $ ->
     stop: (event, ui) ->
       $.ajax {
         type: 'POST',
-        url: '<%= Rails.application.routes.url_helpers.class_categories_sort_path %>.js',
+        url: '<%= ActionController::Base.relative_url_root%>/admin/class_categories/sort.js',
         data: $(this).sortable('serialize')
       }
     opacity: 0.4
@@ -41,7 +41,7 @@ $ ->
     stop: (event, ui) ->
       $.ajax {
         type: 'POST',
-        url: '<%= Rails.application.routes.url_helpers.class_sub_categories_sort_path %>.js',
+        url: '<%= ActionController::Base.relative_url_root %>/admin/class_sub_categories/sort.js',
         data: $(this).sortable('serialize')
       }
     opacity: 0.4
@@ -55,7 +55,7 @@ $ ->
     stop: (event, ui) ->
       $.ajax {
         type: 'POST',
-        url: '<%= Rails.application.routes.url_helpers.library_classes_sort_path %>.js',
+        url: '<%= ActionController::Base.relative_url_root %>/admin/library_classes/sort.js',
         data: $(this).sortable('serialize')
       }
     opacity: 0.4
