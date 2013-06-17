@@ -4,7 +4,7 @@ A Rails 3.x application for managing and registering for NYU Libraries classes. 
 
 ## Configuring LDAP
 
-The app uses LDAP to do a simple check making sure that the registrant's user ID is valid. It accomplishes this with an anonymous bind. So the server running the app has to have [OpenLDAP](http://www.openldap.org/) and the [ruby-new-ldap](https://github.com/ruby-ldap/ruby-net-ldap) gem installed. 
+The app uses LDAP to do a simple check making sure that the registrant's user ID is valid. So the server running the app has to have [OpenLDAP](http://www.openldap.org/) and the [ruby-new-ldap](https://github.com/ruby-ldap/ruby-net-ldap) gem installed. 
 
 As we've encountered this issue in the past, the bind may not work and could return a "Can't connect to LDAP server" error message. This is because there is no valid certificate setup for talking between the application server and the LDAP server. According to the [ldap.conf manual](http://linux.die.net/man/5/ldap.conf) you can open this strict measure up to allow for a connection without a cert. 
 
