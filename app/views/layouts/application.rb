@@ -55,6 +55,23 @@ module Views
       def show_tabs
         return false
       end
+      
+      # Login link and icon
+      def login(params={})
+        (current_user) ? link_to_logout : link_to_login
+      end
+
+      # Link to logout
+      def link_to_logout
+        icon_tag(:logout) +
+          link_to("Log-out #{current_user.firstname}", 
+            logout_url, class: "logout")
+      end
+
+      # Link to logout
+      def link_to_login
+        icon_tag(:login) + link_to("Login", login_url, class: "login")
+      end
             
     end
   end
