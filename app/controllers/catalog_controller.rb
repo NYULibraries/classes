@@ -17,7 +17,7 @@ class CatalogController < ApplicationController
   def create
     @class_categories = ClassCategory.visible
     @library_classes = LibraryClass.visible.in_order
-    @user = User.find_or_create_by_username(params[:user][:username])
+    @user = (current_user) ? current_user : User.find_or_create_by_username(params[:user][:username])
     @user.update_attributes(params[:user])
     @registration = Registration.new
     flash[:notice] = []
