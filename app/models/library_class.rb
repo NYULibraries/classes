@@ -7,8 +7,10 @@ class LibraryClass < ActiveRecord::Base
   belongs_to :class_sub_category
   belongs_to :class_category
   
-  scope :ordered, :order => "position ASC"
-  scope :visible, where(:visible => true)
+  scope :ordered, :order => "library_classes.position ASC"
+  # INNER JOIN ON class_category and LEFT OUTER JOIN ON class_sub_category
+  # Because class_sub_category may sometimes be blank
+  scope :visible, joins(:class_category).includes(:class_sub_category).where(:visible => true, :class_categories => { :visible => true }).where("class_sub_categories.visible = 1 OR class_sub_categories.visible IS NULL")
   scope :in_order, includes(:class_category, :class_sub_category).order("class_categories.position ASC, class_sub_categories.position ASC, library_classes.position ASC")
   scope :without_sub_category, where(:class_sub_category_id => nil)
     

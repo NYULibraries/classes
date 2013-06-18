@@ -3,7 +3,7 @@
 	
 	<%= simple_format(sanitize(class_category.head_text, :tags => %w(b strong i em br p a))) %> 
 	
-	<% unless class_category.class_sub_categories.empty? %>
+	<% unless class_category.class_sub_categories.visible.empty? %>
 		<ul>
 			<% class_category.class_sub_categories.visible.each do |class_sub_category| %>
 			<li>

@@ -4,10 +4,10 @@ class ClassSubCategory < ActiveRecord::Base
   validates_presence_of :title, :class_category_id
   
   belongs_to :class_category
-  has_many :library_classes, :dependent => :nullify, :order => "position ASC"
+  has_many :library_classes, :dependent => :nullify, :order => "library_classes.position ASC"
   
-  default_scope :order => "position ASC"
-  scope :visible, where(:visible => true)
+  default_scope :order => "class_sub_categories.position ASC"
+  scope :visible, joins(:class_category).where("class_categories.visible = 1 AND class_sub_categories.visible = 1")
   
   def is_visible?
     self.visible?
