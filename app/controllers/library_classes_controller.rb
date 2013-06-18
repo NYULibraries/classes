@@ -12,7 +12,7 @@ class LibraryClassesController < ApplicationController
   # GET /library_classes/1
   def show
     @library_class = LibraryClass.find(params[:id])
-    @class_date = ClassDate.new
+    @class_date = ClassDate.new(params[:class_date])
     respond_with(@library_class)
   end
   

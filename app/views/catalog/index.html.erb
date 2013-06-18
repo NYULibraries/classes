@@ -21,7 +21,11 @@
 		<div class="classes_container frontend">
 			<ul id="toc">
 				<% @class_categories.each do |class_category| %>
-					<%= render :partial => 'catalog/toc', :locals => { :class_category => class_category } %>
+					<% unless class_category.external? %>
+						<%= render :partial => 'catalog/toc', :locals => { :class_category => class_category } %>
+					<% else %>
+						<%= render :partial => 'catalog/category_toc', :locals => { :class_category => class_category } %>
+					<% end %>
 				<%	end %>
 			</ul>
 			<p class="suggest">
@@ -51,7 +55,10 @@
 		</div>
     	
 		<p>
-		<%= f.submit "Submit" %>
+			<% if @class_category %>
+			<input type="hidden" value="<%= @class_category.id %>" name="class_category_id" id="class_category_id" />
+			<% end %>
+			<%= f.submit "Submit" %>
 		</p>
 		
 	<% end %>

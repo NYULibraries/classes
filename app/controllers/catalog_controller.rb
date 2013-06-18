@@ -4,20 +4,29 @@ class CatalogController < ApplicationController
   # GET /
   def index
     @class_categories = ClassCategory.visible
-    @library_classes = LibraryClass.visible.in_order
+    @library_classes = LibraryClass.non_external.visible.in_order
     @user = (current_user) ? current_user : User.new
     
     @registration = Registration.new
     @suggestion = Suggestion.new
     
-    respond_with(@registration) 
+    respond_with(@registration)
   end
   
   # POST /catalog
   def create
-    @class_categories = ClassCategory.visible
-    @library_classes = LibraryClass.visible.in_order
+    @class_category = ClassCategory.find(params[:class_category_id]) unless params[:class_category_id].nil?
+    # If there is an external class category, display just that one with its classes
+    if @class_category
+      @class_categories = [@class_category]
+      @library_classes = @class_category.library_classes.visible.in_order
+    # Else show all categories and classes
+    else
+      @class_categories = ClassCategory.visible
+      @library_classes = LibraryClass.visible.in_order
+    end
     @registration = Registration.new
+    @suggestion = Suggestion.new(params[:suggestion])
     
     # Find user if exists, or initialize otherwise
     @user = User.find_or_initialize_by_username(params[:user][:username])
@@ -37,20 +46,21 @@ class CatalogController < ApplicationController
           this_registration = Registration.new
           this_registration.user = @user
           this_registration.class_date_id = class_date.last
-          
-          # Save suggestion
-          @suggestion = Suggestion.new(params[:suggestion])
-          @suggestion.fullname = @user.fullname
-          @suggestion.username = @user.username
-          @suggestion.email = @user.email
-          @suggestion.save
-          
+            
           # Check to see if we can save this registration and if so set a success message and send email
           if this_registration.save
             flash[:notice] << "You have successfully registered for <strong>#{this_registration.class_date.library_class.title}</strong>.".html_safe
             @registrations << this_registration
+            
+            # Save suggestion
+            @suggestion.fullname = @user.fullname
+            @suggestion.username = @user.username
+            @suggestion.email = @user.email
+            @suggestion.save
+            
             # Send confirmation email 
             RegistrationMailer.confirmation_email(@registrations).deliver
+            
           # If we couldn't save it and it wasn't null that's because it's a duplicate record. Print a nice message for 'em
           else
             @registration.errors.add(:base, "You are already registered for <strong>#{this_registration.class_date.library_class.title}</strong> for the selected timeslot.".html_safe)
@@ -72,6 +82,23 @@ class CatalogController < ApplicationController
       end
     end
     
+  end
+  
+  # GET /category/1-parameterized-title
+  #
+  # If category is flagged as external it links to a single category page
+  def show_category
+    @class_category = ClassCategory.find(params[:id])
+    @class_categories = [@class_category]
+    @library_classes = @class_category.library_classes.visible.in_order
+    @user = (current_user) ? current_user : User.new
+    
+    @registration = Registration.new
+    @suggestion = Suggestion.new
+    
+    respond_with(@registration) do |format|
+      format.html { render :index }
+    end
   end
   
   # POST /catalog/autofill_user_fields

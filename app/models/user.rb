@@ -42,6 +42,15 @@ class User < ActiveRecord::Base
     wherefrom "How did you find out about the classes NYU Libraries offers?"
   end
   
+  # Boolean if user is app admin
+  def is_admin?
+    if self.user_attributes.nil? or self.user_attributes[:classes_admin].nil?
+      false
+    else
+      self.user_attributes[:classes_admin]
+    end
+  end
+  
 private
 
   # Verify submitted username is a valid NetID

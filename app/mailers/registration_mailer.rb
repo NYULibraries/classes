@@ -17,15 +17,22 @@ class RegistrationMailer < ActionMailer::Base
   def follow_up_email(response_email, registrations)
     @response_email = response_email
     recipients = registrations.map {|reg| (reg.user.email) if reg.was_attended? }
-    mail(:to => "library-classes@library.nyu.edu", :bcc => recipients, :subject => @response_email.subject, :reply_to => @response_email.reply_to, :body => @response_email.body)
+    mail(:to => "library-classes@library.nyu.edu", :bcc => recipients, :subject => @response_email.subject, :reply_to => @response_email.reply_to)
   end
   
   # Auto reminder to students in a class
-  def reminder_email(registrations)
+  def auto_reminder_email(class_date)
+    @response_email = ReponseEmail.find_by_purpose("auto_reminder")
+    @body = format_auto_reminder(@respond_email.body, registration)
+    recipients = class_date.registrations.map {|reg| reg.user.email }
+    mail(:to => "library-classes@library.nyu.edu", :bcc => recipients, :subject => @response_email.subject, :reply_to => @response_email.reply_to)
   end
   
   # Auto reminder to instructor teaching the course
-  def instructor_reminder_email(registrations)
+  def instructor_reminder_email(class_date)
+    @response_email = ReponseEmail.find_by_purpose("auto_instructor_reminder")
+    @body = format_instructor_auto_reminder(@respond_email.body, class_date)
+    mail(:to => registration.instructors, :subject => @response_email.subject, :reply_to => @response_email.reply_to) unless registration.instructors.blank?
   end
 
 private
@@ -63,9 +70,9 @@ private
   end
   
   # Format tokens for auto reminder
-  def format_auto_reminder(body, registration)
-    body.gsub!(/\%class_location/, registration.class_date.library_class.location)
-    body.gsub!(/\%class/, "#{registration.class_date.library_class.title} \u2014 #{registration.class_date.to_formatted_datetime}")
+  def format_auto_reminder(body, class_date)
+    body.gsub!(/\%class_location/, class_date.library_class.location)
+    body.gsub!(/\%class/, "#{class_date.library_class.title} \u2014 #{class_date.to_formatted_datetime}")
   end
   
   # Format tokens for auto reminder to instructor

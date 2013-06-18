@@ -7,6 +7,7 @@ Classes::Application.routes.draw do
   post "create_suggestion" => "catalog#create_suggestion"
   get "suggest" => "catalog#new_suggestion"
   post "autofill_user_fields" => "catalog#autofill_user_fields"
+  get "category/:id", :to => "catalog#show_category", :as => :external_category
   
   scope "admin" do
     post "class_dates/send_follow_up", :to => "class_dates#send_follow_up", :as => :send_follow_up

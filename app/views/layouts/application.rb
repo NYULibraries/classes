@@ -28,6 +28,7 @@ module Views
       def breadcrumbs
         breadcrumbs = [link_to("NYU Libraries", "https://library.nyu.edu")]
         breadcrumbs << link_to_unless_current(application_title, root_url)
+        breadcrumbs << link_to_unless_current(strip_tags(@class_category.title), external_category_url(:id => "#{@class_category.id}-#{@class_category.title_formatted}")) unless @class_category.blank? or is_in_admin_view?
         breadcrumbs << link_to("Admin", class_categories_path) if is_in_admin_view?
         breadcrumbs << link_to_unless_current(controller.controller_name.humanize) unless controller.controller_name == "catalog"
         return breadcrumbs

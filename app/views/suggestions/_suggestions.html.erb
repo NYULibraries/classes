@@ -42,7 +42,7 @@
 			<td><%=h suggestion.fullname %></td>
 			<td><%= link_to_user(suggestion.username) %></td>
 			<td><%=h suggestion.email %></td>
-			<td><%=h suggestion.suggestion %></td>
+			<td><%= content_tag :abbr, truncate(suggestion.suggestion, :length => 140), :title => suggestion.suggestion %></td>
 			<td><%= link_to 'Show', suggestion %></td>
 			<td><%= link_to 'Edit', edit_suggestion_path(suggestion) %></td>
 			<td><%= link_to 'Destroy', suggestion, :confirm => 'Are you sure?', :method => :delete %></td>

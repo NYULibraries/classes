@@ -12,13 +12,14 @@ class ClassDatesController < ApplicationController
   def create
     @library_class = LibraryClass.find(params[:class_date][:library_class_id])
     @class_date = ClassDate.new(params[:class_date])
-    if @class_date.save
-      flash[:notice] = t('class_dates.flash.create.notice')
-    else
-      flash[:error] = t('class_dates.flash.create.error')
-    end
-    respond_with(@class_date) do |format|
-      format.html { redirect_to @library_class }
+    respond_with(@library_class) do |format|
+      if @class_date.save
+        flash[:notice] = t('class_dates.flash.create.notice')
+        format.html { redirect_to @library_class }
+      else
+        flash[:error] = t('class_dates.flash.create.error')
+        format.html { redirect_to library_class_path(params.merge!({:id => params[:class_date][:library_class_id]})) }
+      end
     end
   end
 

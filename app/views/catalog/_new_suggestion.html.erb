@@ -1,6 +1,6 @@
 <%= simple_fields_for :suggestion do |f| %>
 	<fieldset>
 		<legend>Suggest a Class</legend>
-		<%= f.input :suggestion, label: false, input_html: { :rows => 2 } %>
+		<%= f.input :suggestion, label: false, input_html: { :rows => 2, :value => @suggestion.suggestion } %>
 	</fieldset>
 <% end %>

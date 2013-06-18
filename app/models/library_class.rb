@@ -13,6 +13,7 @@ class LibraryClass < ActiveRecord::Base
   scope :visible, joins(:class_category).includes(:class_sub_category).where(:visible => true, :class_categories => { :visible => true }).where("class_sub_categories.visible = 1 OR class_sub_categories.visible IS NULL")
   scope :in_order, includes(:class_category, :class_sub_category).order("class_categories.position ASC, class_sub_categories.position ASC, library_classes.position ASC")
   scope :without_sub_category, where(:class_sub_category_id => nil)
+  scope :non_external, joins(:class_category).where(:class_categories => { :external => false })
     
   def is_visible?
     self.visible?

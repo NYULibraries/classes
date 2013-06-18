@@ -1,6 +1,7 @@
 <li>
-	<h2><%= link_to_class_category_url(class_category)%></h2>
+	<h2><%= link_to_external_category(class_category)%></h2>
 	
+	<% unless @class_category.nil? %>
 	<%= simple_format(sanitize(class_category.head_text, :tags => %w(b strong i em br p a))) %> 
 	
 	<% unless class_category.class_sub_categories.visible.empty? %>
@@ -33,4 +34,5 @@
 	<% end -%>
 
 	<%= content_tag(:div, simple_format(sanitize(class_category.foot_text, :tags => %w(b strong i em br p a))), :class => "category_footer") %> 
+	<% end %>
 </li>

@@ -5,13 +5,14 @@ class ClassDate < ActiveRecord::Base
 	validates_numericality_of :capacity, :on => :create, :only_integer => true
 	validates :instructors,
       :allow_blank => true,
-      :format => {:with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})(,(\s)*([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,}))+\z/i}
+      :format => {:with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})(,(\s)*([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,}))*\z/i}
 		
 	belongs_to :library_class
 	has_many :registrations, :dependent => :destroy
 	has_many :users, :through => :registrations
 	
   default_scope :order => 'the_date ASC'
+  scope :for_tomorrow, lambda { where("DATE_FORMAT(the_date, '%Y%m%d') = ?", Time.now.tomorrow.strftime("%Y%m%d")) }
   
   def to_formatted_datetime
     self.the_date.strftime("%a., %b %d %Y \u2014 %I:%M%p")
@@ -25,11 +26,15 @@ class ClassDate < ActiveRecord::Base
     self.cancelled
   end
   
+  def is_past?
+    lambda { (the_date.strftime("%Y%m%d%M%H").to_i <= Time.now.strftime("%Y%m%d%M%H").to_i) }
+  end
+  
   # Disable ability to register for class if class date is:
   # * full
   # * cancelled; or
   # * in the past
   def is_disabled?
-    self.is_full? or self.is_cancelled? or self.the_date.past?
+    self.is_full? or self.is_cancelled? or self.is_past?
   end
 end

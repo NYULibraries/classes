@@ -17,4 +17,8 @@ class ClassCategory < ActiveRecord::Base
     ActionController::Base.helpers.sanitize(self.title, :tags => %w(a strong em), :attributes => %w(name target href class))
   end
   
+  def title_formatted
+    ActionController::Base.helpers.strip_tags(self.title).parameterize
+  end
+  
 end

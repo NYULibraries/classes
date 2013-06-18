@@ -29,7 +29,9 @@ class UsersController < ApplicationController
   # PUT /users/1
   def update
     @user = User.find(params[:id])
-    flash[:notice] = t('users.flash.update.notice') if @user.update_attributes(params[:user]) 
+    admin = (params[:user_attributes].nil?) ? false : (params[:user_attributes][:classes_admin] == "on") ? true : false
+    @user.user_attributes = { :classes_admin => admin } unless @user == current_user
+    flash[:notice] = t('users.flash.update.notice') if @user.save and @user.update_attributes(params[:user]) 
     respond_with(@user)
   end
 
