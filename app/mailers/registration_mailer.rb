@@ -5,8 +5,8 @@ class RegistrationMailer < ActionMailer::Base
   # Auto confirmation email after submission
   def confirmation_email(registrations)
     @response_email = ResponseEmail.find_by_purpose('auto_response')
-    body = format_confirmation_email(@response_email.body, registrations)
-    mail(:to => registrations.first.user.email, :subject => @response_email.subject, :reply_to => @response_email.reply_to, :body => body)
+    @body = format_confirmation_email(@response_email.body, registrations)
+    mail(:to => registrations.first.user.email, :subject => @response_email.subject, :reply_to => @response_email.reply_to)
   end
   
   # Cancellation email
@@ -34,7 +34,7 @@ private
   def format_confirmation_email(body, registrations)
     body = format_email_classes(body, registrations)
     body = format_email_user_info(body, registrations.first.user)
-    return body.html_safe
+    return body
   end
    
   # Format classes for email

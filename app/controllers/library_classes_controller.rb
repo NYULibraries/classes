@@ -1,9 +1,10 @@
 class LibraryClassesController < ApplicationController
   before_filter :authenticate_admin
-  respond_to :js, :html
+  respond_to :js, :html, :json
   
   # GET /library_classes
   def index
+    @library_classes = LibraryClass.all
     @class_categories = ClassCategory.all
     respond_with(@library_classes)
   end
