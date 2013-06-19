@@ -22,17 +22,17 @@ class RegistrationMailer < ActionMailer::Base
   
   # Auto reminder to students in a class
   def auto_reminder_email(class_date)
-    @response_email = ReponseEmail.find_by_purpose("auto_reminder")
-    @body = format_auto_reminder(@respond_email.body, registration)
+    @response_email = ResponseEmail.find_by_purpose("auto_reminder")
+    @body = format_auto_reminder(@response_email.body, class_date)
     recipients = class_date.registrations.map {|reg| reg.user.email }
     mail(:to => "library-classes@library.nyu.edu", :bcc => recipients, :subject => @response_email.subject, :reply_to => @response_email.reply_to)
   end
   
   # Auto reminder to instructor teaching the course
   def instructor_reminder_email(class_date)
-    @response_email = ReponseEmail.find_by_purpose("auto_instructor_reminder")
-    @body = format_instructor_auto_reminder(@respond_email.body, class_date)
-    mail(:to => registration.instructors, :subject => @response_email.subject, :reply_to => @response_email.reply_to) unless registration.instructors.blank?
+    @response_email = ResponseEmail.find_by_purpose("auto_instructor_reminder")
+    @body = format_instructor_auto_reminder(@response_email.body, class_date)
+    mail(:to => class_date.instructors, :subject => @response_email.subject, :reply_to => @response_email.reply_to) unless class_date.instructors.blank?
   end
 
 private
@@ -79,7 +79,7 @@ private
   def format_instructor_auto_reminder(body, class_date)
     body.gsub!(/\%class_location/, class_date.library_class.location)
     body.gsub!(/\%class/, "#{class_date.library_class.title} \u2014 #{class_date.to_formatted_datetime}")
-    body.gsub!(/\%registrations_count/, class_date.registations.count)
+    body.gsub!(/\%registrations_count/, class_date.registrations.count.to_s)
     body = format_email_registrations(body, class_date.registrations)
   end
   
@@ -88,7 +88,7 @@ private
     registrations_formatted = ""
     registrations.each do |registration|
      user = registration.user
-     registrations_formatted += "#{user.name}, #{user.email}, #{user.school}, Major/Program: #{user.program}, Status: #{user.status}\n"
+     registrations_formatted += "#{user.fullname}, #{user.email}, #{user.school}, Major/Program: #{user.program}, Status: #{user.status}\n"
     end
     body.gsub!(/\%registrations/,registrations_formatted)
     return body

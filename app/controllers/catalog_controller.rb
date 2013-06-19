@@ -10,7 +10,7 @@ class CatalogController < ApplicationController
     @registration = Registration.new
     @suggestion = Suggestion.new
     
-    respond_with(@registration)
+    respond_with(@registration) and return unless performed?
   end
   
   # POST /catalog
@@ -97,7 +97,7 @@ class CatalogController < ApplicationController
     @suggestion = Suggestion.new
     
     respond_with(@registration) do |format|
-      format.html { render :index }
+      format.html { render :index and return unless performed? }
     end
   end
   

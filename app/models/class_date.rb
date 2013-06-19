@@ -27,7 +27,7 @@ class ClassDate < ActiveRecord::Base
   end
   
   def is_past?
-    lambda { (the_date.strftime("%Y%m%d%M%H").to_i <= Time.now.strftime("%Y%m%d%M%H").to_i) }
+    the_date.strftime("%Y%m%d%M%H").to_i <= Time.now.strftime("%Y%m%d%M%H").to_i
   end
   
   # Disable ability to register for class if class date is:

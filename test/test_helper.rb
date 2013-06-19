@@ -29,9 +29,8 @@ end
 class ActiveSupport::TestCase
   fixtures :all
   
-  #Umbra::Record.reindex
   def set_dummy_pds_user(user_session)
-    user_session.instance_variable_set("@pds_user".to_sym, users(:real_user))
+    user_session.instance_variable_set("@pds_user".to_sym, users(:nonadmin))
   end
 end
 

@@ -4,6 +4,7 @@ namespace :reminder_emails do
   task :auto_reminders => :environment do
     # Find all registrations for tomorrow
     @class_dates = ClassDate.for_tomorrow
+
     @class_dates.each do |class_date|
       # Send an email with bcc list to all registered students
       RegistrationMailer.auto_reminder_email(class_date).deliver

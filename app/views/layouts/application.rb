@@ -41,8 +41,8 @@ module Views
       
       # Prepend modal dialog elements to the body
       def prepend_body
-        prepend_body = '<div class="modal-container"></div>'.html_safe
-        prepend_body << '<div id="ajax-modal" class="modal hide fade" tabindex="-1"></div>'.html_safe
+        content_tag(:div, nil, :class => "modal-container")+
+        content_tag(:div, nil, :id => "ajax-modal", :class => "modal hide fade", :tabindex => "-1")
       end
       
       # Prepend the flash message partial before yield

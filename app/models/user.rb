@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
   has_many :class_dates, :through => :registrations
   
   # Users without registrations
-  scope :non_admin, where("user_attributes NOT LIKE '%class_admin: true%'")
+  scope :non_admin, where("user_attributes IS NULL OR user_attributes NOT LIKE '%:classes_admin: true%'")
   scope :inactive, lambda { includes(:registrations).where('registrations.id' => nil) }
   
   serialize :user_attributes
