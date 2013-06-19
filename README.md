@@ -1,5 +1,8 @@
 # Classes
 
+[![Build Status](https://travis-ci.org/NYULibraries/classes.png)](https://travis-ci.org/NYULibraries/classes)
+[![Code Climate](https://codeclimate.com/github/NYULibraries/classes.png)](https://codeclimate.com/github/NYULibraries/classes)
+
 A Rails 3.x application for managing and registering for NYU Libraries classes. For more information check out the [Classes](http://github.com/NYULibraries/classes/wiki) wiki.
 
 ## Configuring LDAP
