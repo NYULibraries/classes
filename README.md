@@ -1,7 +1,9 @@
 # Classes
 
-[![Build Status](https://travis-ci.org/NYULibraries/classes.png)](https://travis-ci.org/NYULibraries/classes)
+[![Build Status](https://travis-ci.org/NYULibraries/classes.png?branch=master)](https://travis-ci.org/NYULibraries/classes)
 [![Code Climate](https://codeclimate.com/github/NYULibraries/classes.png)](https://codeclimate.com/github/NYULibraries/classes)
+[![Dependency Status](https://gemnasium.com/NYULibraries/classes.png)](https://gemnasium.com/NYULibraries/classes)
+[![Coverage Status](https://coveralls.io/repos/NYULibraries/classes/badge.png)](https://coveralls.io/r/NYULibraries/classes)
 
 A Rails 3.x application for managing and registering for NYU Libraries classes. For more information check out the [Classes](http://github.com/NYULibraries/classes/wiki) wiki.
 
