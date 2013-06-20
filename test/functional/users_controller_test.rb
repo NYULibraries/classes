@@ -35,12 +35,14 @@ class UsersControllerTest < ActionController::TestCase
   end
   
   test "should toggle user admin status" do
-    put :update, :id => users(:nonadmin1).id, :user_attributes => { :classes_admin => "on" }
+    VCR.use_cassette('update user', :match_requests_on => [:path]) do
+      put :update, :id => users(:nonadmin1).id, :user_attributes => { :classes_admin => "on" }
+    end
 
     assert_not_nil assigns(:user)
     assert assigns(:user).user_attributes[:classes_admin], "Admin attr was not toggled"
     
-    assert :success
+    assert_response :success
   end
 
   test "should destroy user" do
@@ -49,6 +51,15 @@ class UsersControllerTest < ActionController::TestCase
     end
 
     assert_redirected_to users_path
+  end
+  
+  test "should not destroy self" do
+    assert_no_difference('User.count') do
+     delete :destroy, :id => users(:admin).id
+    end
+
+    assert_not_nil assigns(:user)
+    assert_redirected_to assigns(:user)
   end
   
   test "should destroy user registration" do

@@ -52,12 +52,12 @@ WebMock.allow_net_connect!
 #@@ldap_password = Settings.ldap.auth.password
 #@@ldap_treebase = Settings.ldap.treebase
 #
-#VCR.configure do |c|
-#  c.cassette_library_dir = 'test/vcr_cassettes'
+VCR.configure do |c|
+  c.cassette_library_dir = 'test/vcr_cassettes'
 #  # webmock needed for HTTPClient testing
-#  c.hook_into :webmock 
+  c.hook_into :webmock 
 #  c.filter_sensitive_data("ldap.university.edu") { @@ldap_host }
 #  c.filter_sensitive_data("uid=admin_user") { @@ldap_username }
 #  c.filter_sensitive_data("ldappass123") { @@ldap_password }
 #  c.filter_sensitive_data("ou=People") { @@ldap_treebase }
-#end
+end

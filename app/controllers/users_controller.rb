@@ -14,12 +14,6 @@ class UsersController < ApplicationController
     respond_with(@user)
   end
 
-  # GET /users/new
-  def new
-    @user = User.new
-    respond_with(@user)
-  end
-
   # GET /users/1/edit
   def edit
     @user = User.find(params[:id])
@@ -29,10 +23,17 @@ class UsersController < ApplicationController
   # PUT /users/1
   def update
     @user = User.find(params[:id])
+    
     admin = (params[:user_attributes].nil?) ? false : (params[:user_attributes][:classes_admin] == "on") ? true : false
+    @user.attributes = params[:user]
     @user.user_attributes = { :classes_admin => admin } unless @user == current_user
-    flash[:notice] = t('users.flash.update.notice') if @user.save and @user.update_attributes(params[:user]) 
-    respond_with(@user)
+
+    respond_with(@user) { |format|
+      if @user.save
+        flash[:notice] = t('users.flash.update.notice')
+        format.html { redirect_to @user }
+      end
+    }
   end
 
   # DELETE /users/1
