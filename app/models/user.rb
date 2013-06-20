@@ -1,9 +1,13 @@
 class User < ActiveRecord::Base
-  validate :ldap_auth
+ 
   attr_accessible :fullname, :email, :username, :phone, :program, :school, :status, :wherefrom
+  attr_accessible :crypted_password, :current_login_at, :current_login_ip, :email, :firstname, :last_login_at, :last_login_ip, :last_request_at, :lastname, :login_count, :mobile_phone, :password_salt, :persistence_token, :refreshed_at, :session_id, :user_attributes
+
+  validate :ldap_auth  
   validates_presence_of :fullname, :email, :phone, :program, :school, :status, :wherefrom
   validates_presence_of :username
   validates :email, :format => { :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i, :on => :create }
+
   has_many :registrations, :dependent => :destroy
   has_many :class_dates, :through => :registrations
   

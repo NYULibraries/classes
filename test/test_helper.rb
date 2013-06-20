@@ -24,6 +24,10 @@ class User
   def uid
     username
   end
+  
+  def ldap_auth
+    return true
+  end
 end
 
 class ActiveSupport::TestCase
@@ -51,10 +55,10 @@ WebMock.allow_net_connect!
 #@@ldap_username = Settings.ldap.auth.username
 #@@ldap_password = Settings.ldap.auth.password
 #@@ldap_treebase = Settings.ldap.treebase
-#
+
 VCR.configure do |c|
   c.cassette_library_dir = 'test/vcr_cassettes'
-#  # webmock needed for HTTPClient testing
+  # webmock needed for HTTPClient testing
   c.hook_into :webmock 
 #  c.filter_sensitive_data("ldap.university.edu") { @@ldap_host }
 #  c.filter_sensitive_data("uid=admin_user") { @@ldap_username }

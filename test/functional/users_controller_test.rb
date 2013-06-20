@@ -6,6 +6,7 @@ class UsersControllerTest < ActionController::TestCase
 
   def setup
    current_user = UserSession.create(users(:admin))
+   @user_attrs = {"fullname"=>"John Smith", "email"=>"nonadmin1@university.edu", "phone"=>"1234567890", "program"=>"CompSci", "school"=>"NYU", "status"=>"JR", "firstname"=>"John", "lastname"=>"Smith", "wherefrom"=>"Professor"}
   end
 
   test "should get index" do
@@ -35,14 +36,14 @@ class UsersControllerTest < ActionController::TestCase
   end
   
   test "should toggle user admin status" do
-    VCR.use_cassette('update user', :match_requests_on => [:path]) do
-      put :update, :id => users(:nonadmin1).id, :user_attributes => { :classes_admin => "on" }
+    VCR.use_cassette('update user') do
+      put :update, :id => users(:ba36).id, :user_attributes => { :classes_admin => "on" }, :user => @user_attrs
     end
 
     assert_not_nil assigns(:user)
     assert assigns(:user).user_attributes[:classes_admin], "Admin attr was not toggled"
     
-    assert_response :success
+    assert_redirected_to assigns(:user)
   end
 
   test "should destroy user" do

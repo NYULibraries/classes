@@ -29,6 +29,23 @@ admin:
     :institutions => ["NYU"],
     :bor_status => "51",
     :aleph_permissions => {} }.to_yaml.inspect  %>
+
+ba36:
+  username: <%= username = "ba36" %>
+  password_salt: <%= salt = Authlogic::Random.hex_token %>
+  crypted_password: <%= Authlogic::CryptoProviders::Sha512.encrypt(username + salt) %>
+  persistence_token: <%= Authlogic::Random.hex_token %>
+  email: <%= username + "@university.edu" %>
+  firstname: Barnaby
+  lastname: Alter
+  user_attributes: <%= {
+    :classes_admin => true,
+    :nyuidn => "N0000000", 
+    :verification => "6EAF453D8B01E5AC27D9",
+    :primary_institution => "NYU",
+    :institutions => ["NYU"],
+    :bor_status => "51",
+    :aleph_permissions => {} }.to_yaml.inspect  %>
     
 nonadmin1:
   username: <%= username = "nonadmin1" %>
