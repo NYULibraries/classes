@@ -14,12 +14,6 @@ class SuggestionsController < ApplicationController
     respond_with(@suggestion)
   end
 
-  # GET /suggestions/new
-  def new
-    @suggestion = Suggestion.new
-    respond_with(@suggestion)
-  end
-
   # GET /suggestions/1/edit
   def edit
     @suggestion = Suggestion.find(params[:id])

@@ -10,3 +10,7 @@ three:
   class_date: one
   user: admin
   attended: true
+
+four:
+  class_date: three
+  user: real_user

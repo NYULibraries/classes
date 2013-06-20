@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_filter :authenticate_admin, :except => [:update_user_fields]
+  before_filter :authenticate_admin
   respond_to :html, :csv
      
   #list users with sort and search options
