@@ -30,7 +30,7 @@ class ActiveSupport::TestCase
   fixtures :all
   
   def set_dummy_pds_user(user_session)
-    user_session.instance_variable_set("@pds_user".to_sym, users(:nonadmin))
+    user_session.instance_variable_set("@pds_user".to_sym, users(:real_user))
   end
 end
 
@@ -47,11 +47,17 @@ require 'webmock'
 # have to tell webmock to let us. 
 WebMock.allow_net_connect!
 
-#@@solr_url = Settings.solr.url
-#
-#VCR.configure do |c|
-#  c.cassette_library_dir = 'test/vcr_cassettes'
-#  # webmock needed for HTTPClient testing
-#  c.hook_into :webmock 
-#  c.filter_sensitive_data("http://127.0.0.1:8981") { @@solr_url }
-#end
+@@ldap_host = Settings.ldap.auth.host
+@@ldap_username = Settings.ldap.auth.username
+@@ldap_password = Settings.ldap.auth.password
+@@ldap_treebase = Settings.ldap.treebase
+
+VCR.configure do |c|
+  c.cassette_library_dir = 'test/vcr_cassettes'
+  # webmock needed for HTTPClient testing
+  c.hook_into :webmock 
+  c.filter_sensitive_data("ldap.university.edu") { @@ldap_host }
+  c.filter_sensitive_data("uid=admin_user") { @@ldap_username }
+  c.filter_sensitive_data("ldappass123") { @@ldap_password }
+  c.filter_sensitive_data("ou=People") { @@ldap_treebase }
+end

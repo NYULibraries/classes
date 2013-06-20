@@ -1,0 +1,12 @@
+one:
+  class_date: one
+  user: real_user
+
+two:
+  class_date: one
+  user: admin
+
+three:
+  class_date: one
+  user: admin
+  attended: true

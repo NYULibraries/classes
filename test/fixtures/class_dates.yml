@@ -1,0 +1,103 @@
+one:
+  the_date: <%= Time.now %>
+  note:
+  cancelled:
+  capacity: 2
+  library_class: regular
+  instructors:
+
+two:
+  the_date: <%= Time.now.tomorrow %>
+  note:
+  cancelled:
+  capacity: 3
+  library_class: regular
+  instructors:
+
+three:
+  the_date: <%= 3.days.from_now %>
+  note:
+  cancelled:
+  capacity: 10
+  library_class: regular
+  instructors:
+
+four:
+  the_date: <%= 1.hour.from_now %>
+  note:
+  cancelled:
+  capacity: 10
+  library_class: regular
+  instructors:
+
+five:
+  the_date: <%= 1.hour.ago %>
+  note:
+  cancelled:
+  capacity: 2
+  library_class: regular
+  instructors:
+
+six:
+  the_date: <%= 1.day.from_now %>
+  note:
+  cancelled:
+  capacity: 3
+  library_class: regular
+  instructors:
+
+seven:
+  the_date: <%= 1.month.from_now %>
+  note:
+  cancelled:
+  capacity: 4
+  library_class: regular
+  instructors:
+
+eight:
+  the_date: <%= 12.hours.from_now %>
+  note:
+  cancelled:
+  capacity: 5
+  library_class: regular
+  instructors:
+
+nine:
+  the_date: <%= 1.minute.from_now %>
+  note:
+  cancelled:
+  capacity: 6
+  library_class: regular
+  instructors:
+
+ten:
+  the_date: <%= 1.year.from_now %>
+  note:
+  cancelled:
+  capacity: 7
+  library_class: regular
+  instructors:
+
+eleven:
+  the_date: <%= 3.months.from_now %>
+  note:
+  cancelled: 
+  capacity: 7
+  library_class: regular
+  instructors:
+
+twelve:
+  the_date: <%= 1.month.ago %>
+  note:
+  cancelled:
+  capacity: 2
+  library_class: regular
+  instructors:
+
+cancelled:
+  the_date: <%= 1.day.from_now %>
+  note:
+  cancelled: true
+  capacity: 2
+  library_class: regular
+  instructors:

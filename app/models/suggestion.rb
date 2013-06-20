@@ -1,8 +1,10 @@
 class Suggestion < ActiveRecord::Base
   attr_accessible :fullname, :suggestion, :email
+  
   validates :email, :allow_blank => true, :format => { :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i, :on => :create }
   validates_presence_of :suggestion
   
+  # Simple SQL search for common suggestion attributes
   def self.search(search)
     if search
       q = "%#{search}%"

@@ -1,0 +1,37 @@
+regular:
+  title: Boring Class
+  description: Don't sign up to this one. It's a real snoozer.
+  location: Bobst 101
+  position: 1
+  class_sub_category: regular
+  registration: true
+  alt_registration_text: This is alternative text
+
+no_sub_cat:
+  title: Fascinating History of Objects and Objectifying
+  description: Just what it sounds like
+  location: The White House
+  position: 2
+  class_category: regular
+  visible: true
+  registration: true
+  
+html:
+  title: <font color="white">Why?</font>
+  class_category: regular
+  
+hidden: 
+  title: Another damn class
+  class_sub_category: regular
+  visible: false
+  
+hidden_parent_sub_cat:
+  title: Class on how to teach classes
+  class_sub_category: hidden
+  visible: true
+  
+hidden_parent_cat:
+  title: Class on how to teach classes
+  class_category: hidden
+  visible: true
+  

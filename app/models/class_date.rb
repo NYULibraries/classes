@@ -9,7 +9,6 @@ class ClassDate < ActiveRecord::Base
 		
 	belongs_to :library_class
 	has_many :registrations, :dependent => :destroy
-	has_many :users, :through => :registrations
 	
   default_scope :order => 'the_date ASC'
   scope :for_tomorrow, lambda { where("DATE_FORMAT(the_date, '%Y%m%d') = ?", Time.now.tomorrow.strftime("%Y%m%d")) }

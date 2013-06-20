@@ -1,0 +1,8 @@
+with_user:
+  fullname: Fred Savage
+  username: real_user
+  email: email@realmail.com
+  suggestion: This is my suggestion
+
+no_user:
+  suggestion: My anonymous suggestions.

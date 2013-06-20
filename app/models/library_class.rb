@@ -7,7 +7,6 @@ class LibraryClass < ActiveRecord::Base
   belongs_to :class_sub_category
   belongs_to :class_category
   
-  scope :ordered, :order => "library_classes.position ASC"
   # INNER JOIN ON class_category and LEFT OUTER JOIN ON class_sub_category
   # Because class_sub_category may sometimes be blank
   scope :visible, joins(:class_category).includes(:class_sub_category).where(:visible => true, :class_categories => { :visible => true }).where("class_sub_categories.visible = 1 OR class_sub_categories.visible IS NULL")

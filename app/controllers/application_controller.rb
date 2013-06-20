@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
   
   # Filter users to root if not admin
   def authenticate_admin
-    if !is_admin
+    if !is_admin?
       redirect_to root_path and return unless performed?
     else
       return true

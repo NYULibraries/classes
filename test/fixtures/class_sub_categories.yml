@@ -1,0 +1,27 @@
+regular:
+  title: A lovely sub category
+  visible: true
+  class_category: regular
+  position: 1
+
+html:
+  title: <font color="black">Don't use font tags jeez!</font>
+  class_category: html
+
+with_url:
+  title: Felix the sub cat
+  visible: true
+  position: 2
+  class_category: regular
+
+hidden:
+  title: Secret Squirrel
+  visible: false
+  position: 3
+  class_category: regular
+  
+hidden_parent:
+  title: Top Secret
+  visible: true
+  position: 4
+  class_category: hidden

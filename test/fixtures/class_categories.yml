@@ -1,0 +1,25 @@
+regular:
+  title: Test category
+  position: 1
+  visible: true
+  head_text: This text coes before the category
+  foot_text: This text comes after the category
+  
+html:
+  title: <a name="html_cat"></a> <font color="orange">This HTML Cat-Scat</font>
+
+with_url:
+  title: Another category
+  position: 2
+  url: http://www.github.com
+  visible: true
+
+hidden:
+  title: A hidden cat
+  position: 3
+  visible: false
+
+external:
+  title: An external cat
+  position: 4
+  external: true
