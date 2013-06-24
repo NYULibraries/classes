@@ -5,7 +5,7 @@
 	<dd><%=h @class_date.library_class.title %></dd>
 	
 	<dt>Class date:</dt>
-	<dd><%= @class_date.to_formatted_datetime %></dd>
+	<dd><%= format_class_date_datetime(@class_date) %></dd>
 	
 	<dt>Capacity:</dt>
 	<dd><%= @class_date.capacity %></dd>

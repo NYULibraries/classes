@@ -4,9 +4,11 @@ class RegistrationMailer < ActionMailer::Base
   
   # Auto confirmation email after submission
   def confirmation_email(registrations)
-    @response_email = ResponseEmail.find_by_purpose('auto_response')
-    @body = format_confirmation_email(@response_email.body, registrations)
-    mail(:to => registrations.first.user.email, :subject => @response_email.subject, :reply_to => @response_email.reply_to)
+    unless registrations.empty?
+      @response_email = ResponseEmail.find_by_purpose('auto_response')
+      @body = format_confirmation_email(@response_email.body, registrations)
+      mail(:to => registrations.first.user.email, :subject => @response_email.subject, :reply_to => @response_email.reply_to)
+    end
   end
   
   # Cancellation email
@@ -16,7 +18,7 @@ class RegistrationMailer < ActionMailer::Base
   # Follow up email sent by instructor/admin after class
   def follow_up_email(response_email, registrations)
     @response_email = response_email
-    recipients = registrations.map {|reg| (reg.user.email) if reg.was_attended? }
+    recipients = registrations.map {|reg| (reg.user.email) if reg.attended? }
     mail(:to => "library-classes@library.nyu.edu", :bcc => recipients, :subject => @response_email.subject, :reply_to => @response_email.reply_to)
   end
   

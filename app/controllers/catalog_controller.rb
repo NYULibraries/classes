@@ -3,8 +3,9 @@ class CatalogController < ApplicationController
   
   # GET /
   def index
-    @class_categories = ClassCategory.visible
-    @library_classes = LibraryClass.non_external.visible.in_order
+    @class_categories = (params[:class_category_id].blank?) ? ClassCategory.visible : [ClassCategory.find(params[:class_category_id]) ]
+    @library_classes = (params[:class_category_id].blank?) ? LibraryClass.visible.non_external.in_order : ClassCategory.find(params[:class_category_id]).library_classes.visible.in_order
+
     @user = (current_user) ? current_user : User.new
     
     @registration = Registration.new
@@ -15,16 +16,9 @@ class CatalogController < ApplicationController
   
   # POST /catalog
   def create
-    @class_category = ClassCategory.find(params[:class_category_id]) unless params[:class_category_id].nil?
-    # If there is an external class category, display just that one with its classes
-    if @class_category
-      @class_categories = [@class_category]
-      @library_classes = @class_category.library_classes.visible.in_order
-    # Else show all categories and classes
-    else
-      @class_categories = ClassCategory.visible
-      @library_classes = LibraryClass.visible.in_order
-    end
+    @class_categories = (params[:class_category_id].blank?) ? ClassCategory.visible : [ClassCategory.find(params[:class_category_id])]
+    @library_classes = (params[:class_category_id].blank?) ? LibraryClass.visible.non_external.in_order : ClassCategory.find(params[:class_category_id]).library_classes.visible.in_order
+
     @registration = Registration.new
     @suggestion = Suggestion.new(params[:suggestion])
     
@@ -34,48 +28,28 @@ class CatalogController < ApplicationController
     @user.assign_attributes(params[:user])
     
     # Track multiple saved registrations
-    @registrations = []
-    # With multiple registrations, come multiple flash notices
-    flash[:notice] = []
+    registrations, flash[:notice] = [], []
  
     # Save user without regard to authlogic session maintenance
     if @user.save_without_session_maintenance
-      unless params[:class_date].nil?
-        params[:class_date].each do |class_date|
-          # Initialize and save each registration
-          this_registration = Registration.new
-          this_registration.user = @user
-          this_registration.class_date_id = class_date.last
-            
-          # Check to see if we can save this registration and if so set a success message and send email
-          if this_registration.save
-            flash[:notice] << "You have successfully registered for <strong>#{this_registration.class_date.library_class.title}</strong>.".html_safe
-            @registrations << this_registration
-            
-            # Save suggestion
-            @suggestion.fullname = @user.fullname
-            @suggestion.username = @user.username
-            @suggestion.email = @user.email
-            @suggestion.save
-            
-            # Send confirmation email 
-            RegistrationMailer.confirmation_email(@registrations).deliver
-            
-          # If we couldn't save it and it wasn't null that's because it's a duplicate record. Print a nice message for 'em
-          else
-            @registration.errors.add(:base, "You are already registered for <strong>#{this_registration.class_date.library_class.title}</strong> for the selected timeslot.".html_safe)
-          end
+      class_dates = params[:class_date].collect { |cd| {class_date_id: cd.last} } unless params[:class_date].blank?
+
+      @user.registrations.create(class_dates) { |reg|
+        if reg.valid?
+          flash[:notice] << "You have successfully registered for <strong>#{reg.class_date.library_class.title}</strong>.".html_safe 
+          registrations << reg
         end
-      # Else there were no class_dates selected, so tell them so
-      else
-        @registration.errors.add(:base, t('catalog.flash.create.error'))
-      end
+      }
+      @user.suggestions.create params[:suggestion] unless registrations.empty?
+      
+      # Send confirmation email for valid registrations
+      RegistrationMailer.confirmation_email(registrations).deliver
     end
 
     # Proudly redirect to root if there are no errors
     # Or, humbly render the errors
-    respond_with(@registration) do |format|
-      if @user.errors.empty? and @registration.errors.empty?
+    respond_with(@user) do |format|
+      if @user.errors.empty? and @user.registrations.all?(&:valid?)
         format.html { redirect_to root_url }        
       else
         format.html { render :index }
@@ -83,25 +57,8 @@ class CatalogController < ApplicationController
     end
     
   end
-  
-  # GET /category/1-parameterized-title
-  #
-  # If category is flagged as external it links to a single category page
-  def show_category
-    @class_category = ClassCategory.find(params[:id])
-    @class_categories = [@class_category]
-    @library_classes = @class_category.library_classes.visible.in_order
-    @user = (current_user) ? current_user : User.new
-    
-    @registration = Registration.new
-    @suggestion = Suggestion.new
-    
-    respond_with(@registration) do |format|
-      format.html { render :index and return unless performed? }
-    end
-  end
-  
-  # POST /catalog/autofill_user_fields
+
+  # GET /catalog/autofill_user_fields
   #
   # Submit the user form when the username was filled in and attempt to find that user
   # Render the form, either blank or with the populated fields from @user if found

@@ -1,15 +1,15 @@
 <div id="application_title">
 	<div class="js_hide">
-	<%= link_to "Edit title", edit_application_detail_url(get_application_detail_by_purpose('application_title')) %>
+	<%= link_to "Edit title", edit_application_detail_url(format_text_by_purpose('application_title')) %>
 	</div>
-	<h1><%= icon_tag :edit %><%= best_in_place @application_title, :the_text %></h1>
+	<h1><%= icon_tag :edit %><%= best_in_place @application_title, :the_text, :display_with => lambda { |v| v.html_safe } %></h1>
 </div>
 
 <div id="application_head_text">
 	<div class="js_hide">
-	<%= link_to "Edit header", edit_application_detail_url(get_application_detail_by_purpose('application_head_text')) %><br />
+	<%= link_to "Edit header", edit_application_detail_url(format_text_by_purpose('application_head_text')) %><br />
 	</div>
-	<%= icon_tag :edit %><%= best_in_place @application_head_text, :the_text, type: :textarea %>
+	<%= icon_tag :edit %><%= best_in_place @application_head_text, :the_text, type: :textarea, :display_with => lambda { |v| v.html_safe } %>
 </div>
 
 <br />
@@ -20,7 +20,7 @@
 	<% @class_categories.each do |class_category| %>
 		<%= content_tag_for :li, class_category do %>
 			<h2><button type="button" class="btn btn-link btn-small collapser" data-toggle="collapse" data-target="#category_<%=class_category.id%>_list"><i class="icon-chevron-right"></i></button>
-				<%= (class_category.is_visible?) ? class_category.title_sanitized : content_tag(:span, :class => "muted") { class_category.title_sanitized.html_safe + " (inactive)" } %></h2>
+				<%= (class_category.visible?) ? sanitize_title(class_category.title) : content_tag(:span, :class => "muted") { sanitize_title(class_category.title) + " (inactive)" } %></h2>
 				<div id="category_<%=class_category.id%>_list" class="collapse out">
 					<ul id="category_<%=class_category.id%>_sub_categories" class="sub_categories_list">
 					<% class_category.class_sub_categories.each do |class_sub_category| %>
@@ -42,9 +42,9 @@
 
 <div id="application_form_text">
 	<div class="js_hide">
-	<%= link_to "Edit footer", edit_application_detail_url(get_application_detail_by_purpose('application_form_text')) %>
+	<%= link_to "Edit footer", edit_application_detail_url(format_text_by_purpose('application_form_text')) %>
 	</div>
-	<div><%= icon_tag :edit %><%= best_in_place @application_form_text, :the_text, type: :textarea %></div>
+	<div><%= icon_tag :edit %><%= best_in_place @application_form_text, :the_text, type: :textarea, :display_with => lambda { |v| v.html_safe } %></div>
 </div>
 
 <br />

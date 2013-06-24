@@ -46,19 +46,10 @@ label { margin-left: 0; }
   margin-top: 10px;
 }
 
-fieldset {
-	max-width: 450px;
-	margin-left: 0;
-}
-
 p.suggest {
 	font-size: 15px;
 	text-align: center;
 	margin-top: 20px;
-}
-
-div.page_container {
-	max-width:500px;
 }
 
 .categories_list ul li, .categories_list  li {
@@ -83,13 +74,21 @@ h4 {
 .classes_container {
   h2 {
     color: #8E2323;
+    border-bottom: 1px solid #e8e8e8;
+  }
+  &#admin_list_classes {
+    h2 {
+      border-bottom: none;
+    }
   }
   > ul { 
     margin-left: 0;
     list-style: none; 
   }
-  max-width: 500px;
-	border: 1px solid #e8e8e8;
+  border: 1px solid #e8e8e8;
+      -webkit-border-radius: 10px;
+         -moz-border-radius: 10px;
+              border-radius: 10px;
 	border-bottom: 2px solid #ccc !important;
 	padding: 10px;
 }
@@ -154,4 +153,8 @@ textarea#response_email_body { width: 80%; }
 #user_attributes_classes_admin {
   float: left;
   margin-right: 10px;
+}
+
+ul.no_sub_category_classes_list {
+  margin-top: 10px;
 }

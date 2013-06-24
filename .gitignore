@@ -13,6 +13,7 @@ rvm.env
 *.bak
 wiki
 *.wiki
+public/test.html
 
 config/settings.local.yml
 config/settings/*.local.yml

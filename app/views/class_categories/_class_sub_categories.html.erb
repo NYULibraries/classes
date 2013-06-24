@@ -10,7 +10,7 @@
 	<% @class_category.class_sub_categories.each do |sub_category| %>
 		<tr>
 			<td>
-				<% if sub_category.is_visible? %>
+				<% if sub_category.visible? %>
 					<%= strip_tags(sub_category.title) %>
 				<% else %>
 					<span class="muted"><%= strip_tags(sub_category.title) %></span>
@@ -20,7 +20,7 @@
 			<td><%= link_to 'Edit', edit_class_sub_category_path(sub_category) %></td>
 			<td><%= link_to 'Destroy', sub_category, :confirm => 'Are you sure that you want to delete this sub category?', :method => :delete %></td>
 			<td>
-			<%= link_to "#{(sub_category.is_visible?) ? 'Hide' : 'Reveal' }", class_sub_category_path(sub_category, params.merge(:class_sub_category => {:visible => !sub_category.visible})), :method => :put,  :class => "toggle_visible", :remote => true %>
+			<%= link_to "#{(sub_category.visible?) ? 'Hide' : 'Reveal' }", class_sub_category_path(sub_category, params.merge(:class_sub_category => {:visible => !sub_category.visible})), :method => :put,  :class => "toggle_visible", :remote => true %>
 		<% end %>
 	</tbody>
 </table>

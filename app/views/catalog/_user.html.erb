@@ -9,5 +9,6 @@
 	<%= f.input :school, collection: t("users.schools"), prompt: "Select one" %>
 	<%= f.input :status, collection: t("users.statuses"), prompt: "Select one" %>
 	<%= f.input :wherefrom, :label => "How did you find out about the classes NYU Libraries offers?", collection: t("users.wherefroms"), prompt: "Select one" %>
+	<input type="hidden" name="class_category_id" value="<%= params[:class_category_id] %>" />
 </fieldset>
 <% end %>

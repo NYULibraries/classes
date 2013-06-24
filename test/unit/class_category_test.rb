@@ -27,13 +27,13 @@ class ClassCategoryTest < ActiveSupport::TestCase
   
   test "visible scope" do
     ClassCategory.visible.each do |cat|
-      assert cat.is_visible?, "#{cat.title} is not visible, but should be"
+      assert cat.visible?, "#{cat.title} is not visible, but should be"
     end
   end
   
   test "is visible boolean function" do 
-    assert @class_category.is_visible?
-    assert !class_categories(:hidden).is_visible?
+    assert @class_category.visible?
+    assert !class_categories(:hidden).visible?
   end
   
   test "title is required" do
@@ -43,14 +43,5 @@ class ClassCategoryTest < ActiveSupport::TestCase
     assert class_category.valid?
     assert_nothing_raised() { class_category.save! }
   end
-  
-  test "title is sanitized" do
-    assert_equal @class_category_html.title_sanitized, '<a name="html_cat"></a> This HTML Cat-Scat'
-  end
-  
-  test "title is formatted as parameters without tags" do
-    assert_equal @class_category_html.title_formatted, 'this-html-cat-scat'
-    assert_equal @class_category.title_formatted, 'test-category'
-  end
-  
+    
 end

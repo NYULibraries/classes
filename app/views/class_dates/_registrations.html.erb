@@ -23,7 +23,7 @@
 			<td><%= reg.created_at.to_formatted_s(:db) %></td>
 			<td>
 			<%= simple_form_for(reg, :html => {:class => "form-inline tiny_form"}, :remote => true) do |f| %>
-			<%= f.input :attended, as: :boolean, :label_html => { :class => "checkbox inline"}, :input_html => { :checked => reg.was_attended? } %>
+			<%= f.input :attended, as: :boolean, :label_html => { :class => "checkbox inline"}, :input_html => { :checked => reg.attended? } %>
 			<%= f.submit "Save" %>
 			<% end -%>
 			</td>

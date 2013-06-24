@@ -12,7 +12,7 @@
 				<ul>
 					<% class_sub_category.library_classes.visible.each do |library_class|%>
 					<li>
-						<%= link_to library_class.title_sanitized, :anchor => library_class.title.parameterize %>
+						<%= link_to sanitize_title(library_class.title), :anchor => library_class.title.parameterize %>
 					</li>
 					<% end -%>	
 				</ul>
@@ -23,10 +23,10 @@
 	
 	<!-- These are classes in the category without a sub category -->
 	<% unless class_category.library_classes.without_sub_category.visible.empty? %>
-	<ul>
+	<ul class="no_sub_category_classes_list">
 		<% class_category.library_classes.without_sub_category.visible.each do |library_class| %>
 		<li>
-		<%= link_to library_class.title_sanitized, :anchor => library_class.title.parameterize %>
+		<%= link_to sanitize_title(library_class.title), :anchor => library_class.title.parameterize %>
 		</li>	
 		<% end -%>
 	</ul>

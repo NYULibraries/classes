@@ -22,22 +22,16 @@ class ApplicationController < ActionController::Base
   end
   alias :current_user :current_user_dev if Rails.env == "development"
 
-  # Return true if user is marked as admin
-  def is_admin
-  	if current_user.nil? or current_user.user_attributes.nil? or !current_user.user_attributes[:classes_admin]
-      return false
-    else
-      return true
-    end
+  # Return boolean if user is logged out or is admin
+  def is_admin?
+    (!current_user.nil? and current_user.is_admin?)
   end
-  alias :is_admin? :is_admin
   helper_method :is_admin?
- 
+
   # Return boolean matching the url to find out if we are in the admin view
-  def is_in_admin_view
+  def is_in_admin_view?
     !request.path.match("/admin").nil?
   end
-  alias :is_in_admin_view? :is_in_admin_view
   helper_method :is_in_admin_view?
 
 end

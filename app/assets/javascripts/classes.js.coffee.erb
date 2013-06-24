@@ -13,7 +13,7 @@ $ ->
   # Autocomplete user form when the username has been filled out
   $('#users_form').on 'blur', '#user_username', -> 
     $.ajax {
-        type: 'POST',
+        type: "POST",
         url: '<%= ActionController::Base.relative_url_root %>/autofill_user_fields.js',
         data: $(this).closest("form").serializeArray(),
         success: (data, textStatus, jqXHR) ->
@@ -26,7 +26,7 @@ $ ->
     handle: "h2"
     stop: (event, ui) ->
       $.ajax {
-        type: 'POST',
+        type: 'PUT',
         url: '<%= ActionController::Base.relative_url_root%>/admin/class_categories/sort.js',
         data: $(this).sortable('serialize')
       }
@@ -40,7 +40,7 @@ $ ->
     handle: "h3"
     stop: (event, ui) ->
       $.ajax {
-        type: 'POST',
+        type: 'PUT',
         url: '<%= ActionController::Base.relative_url_root %>/admin/class_sub_categories/sort.js',
         data: $(this).sortable('serialize')
       }
@@ -54,7 +54,7 @@ $ ->
     handle: "h4"
     stop: (event, ui) ->
       $.ajax {
-        type: 'POST',
+        type: 'PUT',
         url: '<%= ActionController::Base.relative_url_root %>/admin/library_classes/sort.js',
         data: $(this).sortable('serialize')
       }
@@ -66,7 +66,7 @@ $ ->
   # Change sub categories select when category is selected
   $(document).on 'change', "#new_library_class select[name='library_class[class_category_id]'], #edit_library_class select[name='library_class[class_category_id]']", ->
     $.ajax {
-        method: $(this).closest("form").attr("method"),
+        type: 'POST'
         url: $(this).closest("form").attr("action") + ".js",
         data: $(this).closest("form").serialize()
     }

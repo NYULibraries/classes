@@ -34,15 +34,15 @@ class LibraryClassTest < ActiveSupport::TestCase
   
   test "visible scope" do
     LibraryClass.visible.each do |libclass|
-      assert libclass.is_visible?, "#{libclass.title} is not visible, but should be"
-      assert libclass.class_category.is_visible?, "Category: #{libclass.class_category.title} is not visible"
-      assert libclass.class_sub_category.is_visible?, "Sub-Category: #{libclass.class_sub_category.title} is not visible" unless  libclass.class_sub_category.nil?
+      assert libclass.visible?, "#{libclass.title} is not visible, but should be"
+      assert libclass.class_category.visible?, "Category: #{libclass.class_category.title} is not visible"
+      assert libclass.class_sub_category.visible?, "Sub-Category: #{libclass.class_sub_category.title} is not visible" unless  libclass.class_sub_category.nil?
     end
   end
   
   test "is visible boolean function" do 
-    assert @library_class.is_visible?
-    assert !library_classes(:hidden).is_visible?
+    assert @library_class.visible?
+    assert !library_classes(:hidden).visible?
   end
   
   test "title is required" do
@@ -55,9 +55,6 @@ class LibraryClassTest < ActiveSupport::TestCase
     assert_nothing_raised() { library_class.save! }
   end
   
-  test "title is sanitized" do
-    assert_equal @library_class_html.title_sanitized, 'Why?'
-  end
 
   
 end

@@ -1,7 +1,7 @@
 <%= content_tag_for :li, class_sub_category do %>
 <h3>
 <button type="button" class="btn btn-link btn-small collapser" data-toggle="collapse" data-target="#sub_category_<%=class_sub_category.id%>_classes"><i class="icon-chevron-right"></i></button>
-<%= (class_sub_category.is_visible?) ? class_sub_category.title.html_safe : content_tag(:span, :class => "muted") { "#{class_sub_category.title} (inactive)".html_safe } %></h3>
+<%= (class_sub_category.visible?) ? class_sub_category.title.html_safe : content_tag(:span, :class => "muted") { "#{class_sub_category.title} (inactive)".html_safe } %></h3>
 
 	<ul id="sub_category_<%= class_sub_category.id %>_classes" class="classes_list collapse out">
 		<% class_sub_category.library_classes.each do |library_class| %>

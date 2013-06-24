@@ -8,10 +8,10 @@
 	<% unless library_class.class_dates.empty?%>
 		<% library_class.class_dates.each do |class_date| %>
 			<% if library_class.registration?%>
-			<%= reg.input :class_date, label: false, as: :radio_buttons, collection: [class_date].map {|x| [format_class_date(x), x.id]}, input_html: { :disabled => class_date.is_disabled?, :name => "class_date[#{library_class.id}]"}, wrapper_html: { :class => "class_date_item" } %>
+			<%= reg.input :class_date, label: false, as: :radio_buttons, collection: [class_date].map {|x| [format_class_date_title(x), x.id]}, input_html: { :disabled => class_date.disabled?, :name => "class_date[#{library_class.id}]"}, wrapper_html: { :class => "class_date_item" } %>
 			<% else %>
 			<div class="class_date_item">
-			<%= format_class_date(class_date) %>
+			<%= format_class_date_datetime(class_date) %>
 			</div>
 			<% end -%>
 		<% end %>

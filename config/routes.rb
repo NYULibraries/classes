@@ -7,27 +7,24 @@ Classes::Application.routes.draw do
   post "create_suggestion" => "catalog#create_suggestion"
   get "suggest" => "catalog#new_suggestion"
   post "autofill_user_fields" => "catalog#autofill_user_fields"
-  get "category/:id", :to => "catalog#show_category", :as => :external_category
+  get "category/:class_category_id", :to => "catalog#index", :as => :external_category
   
   scope "admin" do
     post "class_dates/send_follow_up", :to => "class_dates#send_follow_up", :as => :send_follow_up
     delete "suggestions/destroy_all", :to => "suggestions#clear_suggestions", :as => :clear_suggestions
     delete "clear_users", :to => "users#clear_users"
     delete "destroy_registration", :to => "users#destroy_registration"
-    match "populate_sub_categories_select", :to => "library_classes#populate_sub_categories_select", :via => [:post, :put]
-    post "class_categories_sort", :to => "class_categories#sort"
-    post "class_sub_categories_sort", :to => "class_sub_categories#sort"
-    post "library_classes_sort", :to => "library_classes#sort"
-    resources :library_classes do 
-      post :sort, on: :collection
-    end
-    resources :class_dates 
+    get "populate_sub_categories_select", :to => "library_classes#populate_sub_categories_select"
     resources :class_categories do
-      post :sort, on: :collection
+      put :sort, on: :collection
     end
     resources :class_sub_categories do
-      post :sort, on: :collection
+      put :sort, on: :collection
     end
+    resources :library_classes do 
+      put :sort, on: :collection
+    end
+    resources :class_dates 
     resources :users
     resources :registrations
     resources :response_emails

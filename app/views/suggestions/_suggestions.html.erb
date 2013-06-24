@@ -40,7 +40,7 @@
 		<tr>
 			<td><%=h suggestion.created_at.to_date.to_s %></td>
 			<td><%=h suggestion.fullname %></td>
-			<td><%= link_to_user(suggestion.username) %></td>
+			<td><%= link_to suggestion.username, user_path(suggestion.user_id) unless suggestion.user_id.blank? %></td>
 			<td><%=h suggestion.email %></td>
 			<td><%= content_tag :abbr, truncate(suggestion.suggestion, :length => 140), :title => suggestion.suggestion %></td>
 			<td><%= link_to 'Show', suggestion %></td>

@@ -33,7 +33,7 @@ class RegistrationTest < ActiveSupport::TestCase
   end
   
   test "was attended flag" do
-    assert registrations(:three).was_attended?
+    assert registrations(:three).attended?
   end
   
 end

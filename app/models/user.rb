@@ -3,13 +3,14 @@ class User < ActiveRecord::Base
   attr_accessible :fullname, :email, :username, :phone, :program, :school, :status, :wherefrom
   attr_accessible :crypted_password, :current_login_at, :current_login_ip, :email, :firstname, :last_login_at, :last_login_ip, :last_request_at, :lastname, :login_count, :mobile_phone, :password_salt, :persistence_token, :refreshed_at, :session_id, :user_attributes
 
-  validate :ldap_auth  
-  validates_presence_of :fullname, :email, :phone, :program, :school, :status, :wherefrom
-  validates_presence_of :username
+  validate :ldap_authenticate
+  validates_presence_of :fullname, :email, :phone, :program, :school, :status, :username
+  validates_presence_of :wherefrom, :message => "- How did you find out about the classes NYU Libraries offers?"
   validates :email, :format => { :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i, :on => :create }
 
   has_many :registrations, :dependent => :destroy
   has_many :class_dates, :through => :registrations
+  has_many :suggestions
   
   # Users without registrations
   scope :non_admin, where("user_attributes IS NULL OR user_attributes NOT LIKE '%:classes_admin: true%'")
@@ -57,16 +58,27 @@ class User < ActiveRecord::Base
   
 private
 
-  # Verify submitted username is a valid NetID
-  def ldap_auth
-    auth = { :username => Settings.ldap.auth.username, :password => Settings.ldap.auth.password, :method => :simple }
-    ldap = Net::LDAP.new(:host => Settings.ldap.auth.host, :port => Settings.ldap.auth.port, :encryption => :simple_tls, :auth => auth)
+  def ldap_auth_hash
+    @ldap_auth_hash ||= { :username => Settings.ldap.auth.username, :password => Settings.ldap.auth.password, :method => :simple }
+  end
+  
+  def ldap_connection
+    @ldap_connection ||= Net::LDAP.new(:host => Settings.ldap.auth.host, :port => Settings.ldap.auth.port, :encryption => :simple_tls, :auth => ldap_auth_hash)
+  end
+  
+  def ldap_treebase
+    @ldap_treebase ||= Settings.ldap.treebase
+  end
+  
+  def ldap_attrs
+    @ldap_attrs ||= ["uid"]
+  end
 
-    treebase = Settings.ldap.treebase
+  # Verify submitted username is a valid NetID
+  def ldap_authenticate 
     filter = Net::LDAP::Filter.eq("uid","#{username}")
-    attrs = ["uid"]
     
-    ldap.search(:base => treebase, :filter => filter, :attributes => attrs, :return_result => false) do |entry|
+    ldap_connection.search(:base => ldap_treebase, :filter => filter, :attributes => ldap_attrs, :return_result => false) do |entry|
       return true
     end
     

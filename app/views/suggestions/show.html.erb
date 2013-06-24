@@ -5,7 +5,7 @@
 
 <p>
   <b>Username:</b>
-  <%= link_to_user(@suggestion.username) %>
+  <%= link_to @suggestion.username, user_url(@suggestion.user_id) unless @suggestion.user_id.nil? %>
 </p>
 
 <p>

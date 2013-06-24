@@ -29,24 +29,24 @@ class ClassDateTest < ActiveSupport::TestCase
   end
   
   test "is full boolean function" do 
-    assert @class_date.is_full?
-    assert !class_dates(:three).is_full?
+    assert @class_date.full?
+    assert !class_dates(:three).full?
   end
   
   test "is cancelled boolean function" do
-    assert !@class_date.is_cancelled?
-    assert class_dates(:cancelled).is_cancelled?
+    assert !@class_date.cancelled?
+    assert class_dates(:cancelled).cancelled?
   end
   
   test "is past boolean function" do
-    assert class_dates(:twelve).is_past?
-    assert !class_dates(:seven).is_past?
+    assert class_dates(:twelve).past?
+    assert !class_dates(:seven).past?
   end
   
   test "if radio button should be disabled" do
-    assert class_dates(:twelve).is_disabled?
-    assert class_dates(:cancelled).is_disabled?
-    assert @class_date.is_disabled?
+    assert class_dates(:twelve).disabled?
+    assert class_dates(:cancelled).disabled?
+    assert @class_date.disabled?
   end
 
   test "capacity is required" do

@@ -1,6 +1,6 @@
 <p>
   <b>Title:</b>
-  <%=h @class_category.title_sanitized %>
+  <%=h sanitize_title(@class_category.title) %>
 </p>
 <p>
   <b>External:</b>
