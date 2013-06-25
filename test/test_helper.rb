@@ -25,7 +25,7 @@ class User
     username
   end
   
-  def ldap_auth
+  def ldap_authenticate
     return true
   end
 end
