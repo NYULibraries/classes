@@ -10,7 +10,7 @@ gem 'net-ldap', "~> 0.3.1"
 
 gem 'rake', "~> 10.0.4"
 
-gem 'coffee-rails', '~> 3.2.0'
+gem 'coffee-rails', '~> 3.2.1'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -45,7 +45,7 @@ group :test do
 end
 
 gem 'authpds-nyu', "~> 0.2.12"
-gem 'jquery-rails', "~> 3.0.0"
+gem 'jquery-rails', "~> 2.2.1"
 gem 'sunspot_rails', "~> 2.0.0"
 gem 'acts-as-taggable-on', '~> 2.4.0'
 
