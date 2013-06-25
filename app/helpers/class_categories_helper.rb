@@ -11,7 +11,7 @@ module ClassCategoriesHelper
   
   # Link to an external category list
   def link_to_external_category(class_category)
-    if class_category.external? and params[:class_category_id].nil?
+    if class_category.external? and params[:class_category_id].blank?
       link_to(strip_tags(sanitize_title(class_category.title)), external_category_url(:class_category_id => "#{class_category.id}-#{parameterize_title(class_category.title)}"))
     else
       sanitize_title(class_category.title)

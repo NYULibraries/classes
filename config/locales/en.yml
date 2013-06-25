@@ -2,6 +2,25 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
+  activerecord:
+    attributes:
+      registration:
+        class_date_id: ''
+      user:
+        username: "NetID"
+        email: "E-mail address"
+        wherefrom: "How did you find out about this service"
+    errors:
+      models:
+        registration:
+          attributes:
+            class_date_id: 
+              blank: 'Please select at least one class'
+              taken: 'You are already registered for the selected timeslot'
+        user:
+          attributes:
+            wherefrom:
+              blank: "is required"
   application_title: Library Classes
   footer_html: NYU Division of Libraries. 
   suggestions:

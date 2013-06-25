@@ -14,24 +14,33 @@
 
 <br />
 
+<div id="expand_all_div">
+<%= check_box_tag 'expand_all', nil, session[:expand_all] %><%= label_tag 'expand_all', "Expand all" %>
+</div>
+
 <div id="admin_list_classes" class="classes_container">
 	
 	<ul class="categories_list">
 	<% @class_categories.each do |class_category| %>
 		<%= content_tag_for :li, class_category do %>
-			<h2><button type="button" class="btn btn-link btn-small collapser" data-toggle="collapse" data-target="#category_<%=class_category.id%>_list"><i class="icon-chevron-right"></i></button>
+			<h2><button type="button" class="btn btn-link btn-small collapser" data-toggle="collapse" data-target="#category_<%=class_category.id%>_list"><%=toggle_collapse_icon%></button>
 				<%= (class_category.visible?) ? sanitize_title(class_category.title) : content_tag(:span, :class => "muted") { sanitize_title(class_category.title) + " (inactive)" } %></h2>
-				<div id="category_<%=class_category.id%>_list" class="collapse out">
-					<ul id="category_<%=class_category.id%>_sub_categories" class="sub_categories_list">
-					<% class_category.class_sub_categories.each do |class_sub_category| %>
-						<%= render "class_sub_categories", :class_sub_category => class_sub_category %>
-					<% end %>
-					</ul>
+				<div id="category_<%=class_category.id%>_list" class="collapse <%=collapse_class%>">
+					
+					<!-- These are classes in the category without a sub category -->
 					<ul id="category_<%=class_category.id%>_classes" class="classes_list">
 					<% class_category.library_classes.without_sub_category.each do |library_class| %>
 						<%= render "library_class", :library_class => library_class %>
 					<% end %>
 					</ul>
+					
+					<!-- These are classes inside sub-categories -->
+					<ul id="category_<%=class_category.id%>_sub_categories" class="sub_categories_list">
+					<% class_category.class_sub_categories.each do |class_sub_category| %>
+						<%= render "class_sub_categories", :class_sub_category => class_sub_category %>
+					<% end %>
+					</ul>
+					
 				</div>
 			<% end %>
 		<% end %>

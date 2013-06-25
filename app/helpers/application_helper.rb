@@ -46,4 +46,16 @@ module ApplicationHelper
     class_date.the_date.strftime("%a., %b %d %Y \u2014 %I:%M%p")
   end
   
+  # Toggle collapse class based on session variable
+  def collapse_class
+    "out" unless session[:expand_all]
+    "in" if session[:expand_all]
+  end
+  
+  # Toggle collapse arrow class based on session variable
+  def toggle_collapse_icon
+    return icon_tag :arrow_right unless session[:expand_all]
+    return icon_tag :arrow_down if session[:expand_all]  
+  end
+  
 end

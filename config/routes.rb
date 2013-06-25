@@ -6,10 +6,11 @@ Classes::Application.routes.draw do
   get :create, :to => "catalog#index"
   post "create_suggestion" => "catalog#create_suggestion"
   get "suggest" => "catalog#new_suggestion"
-  post "autofill_user_fields" => "catalog#autofill_user_fields"
+  get "autofill_user_fields" => "catalog#autofill_user_fields", :as => :autofill_user_fields
   get "category/:class_category_id", :to => "catalog#index", :as => :external_category
   
   scope "admin" do
+    get "library_classes/expand_all", :to => "library_classes#expand_all"
     post "class_dates/send_follow_up", :to => "class_dates#send_follow_up", :as => :send_follow_up
     delete "suggestions/destroy_all", :to => "suggestions#clear_suggestions", :as => :clear_suggestions
     delete "clear_users", :to => "users#clear_users"

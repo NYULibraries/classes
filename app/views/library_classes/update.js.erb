@@ -1,4 +1,4 @@
 // Replace library class entry on index page
 $("#library_class_<%=@library_class.id%>").replaceWith("<%=j render 'library_class', :library_class => @library_class %>");
 // Re render the form in _edit with selected subcategories
-$("#edit_library_class").replaceWith("<%=j render 'form'%>");
+$(".edit_library_class").replaceWith("<%=j render 'form'%>");

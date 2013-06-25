@@ -1,17 +1,5 @@
 <div class="page_container">
-	<% @user.registrations.each do |type| %>
-		<% if type.errors.any? %>  
-			<div id="error_explanation" class="alert alert-error">  
-				<h2><%= pluralize(type.errors.count, "error") %> prohibited this record from being saved:</h2>  
-					<ul>  
-					<% type.errors.full_messages.each do |msg| %>  
-						<li><%= msg %></li>  
-					<% end %>  
-				</ul>  
-				<a href="#form">Jump to form</a>
-			</div>  
-		<% end %>
-	<% end %>
+	<%= render 'errors' %>
 
 	<h1><%= format_text_by_purpose('application_title')%></h1>
 

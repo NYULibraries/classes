@@ -59,8 +59,6 @@ gem "kaminari", "~> 0.14.1"
 gem "simple_form", "~> 2.1.0"
 gem "best_in_place", "~> 2.1.0"
 
-gem "custom_error_messages", "~> 0.1.0"
-
 #gem 'nyulibraries_assets', :path => '/apps/nyulibraries_assets'
 gem 'nyulibraries_assets', :git => 'git://github.com/NYULibraries/nyulibraries_assets.git', :tag => "v1.1.3"
 

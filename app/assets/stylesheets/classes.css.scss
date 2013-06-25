@@ -158,3 +158,12 @@ textarea#response_email_body { width: 80%; }
 ul.no_sub_category_classes_list {
   margin-top: 10px;
 }
+
+#expand_all_div {
+  margin-bottom: 10px;
+  label[for="expand_all"] {
+    display: inline;
+    margin-left: 5px;
+  }
+  input#expand_all { margin-top: 0;}
+}

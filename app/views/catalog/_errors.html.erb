@@ -1,0 +1,25 @@
+
+<% if @user.errors.any? %>  
+	<div id="error_explanation" class="alert alert-error">  
+		<h2><%= pluralize(@user.errors.count, "error") %> prohibited this record from being saved:</h2>  
+			<ul>  
+			<% @user.errors.full_messages.each do |msg| %>  
+				<li><%= msg %></li>  
+			<% end %>  
+		</ul>  
+		<a href="#form">Jump to form</a>
+	</div>  
+<% end %>
+
+<% @user.registrations.each do |type| %>
+	<% if type.errors.any? %>  
+		<div id="error_explanation" class="alert alert-error">  
+			<h2><%= pluralize(type.errors.count, "error") %> prohibited this record from being saved:</h2>  
+				<ul>  
+				<% type.errors.full_messages.each do |msg| %>  
+					<li><%= msg %></li>  
+				<% end %>  
+			</ul>  
+		</div>  
+	<% end %>
+<% end %>

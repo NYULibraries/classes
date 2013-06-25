@@ -13,9 +13,8 @@ $ ->
   # Autocomplete user form when the username has been filled out
   $('#users_form').on 'blur', '#user_username', -> 
     $.ajax {
-        type: "POST",
-        url: '<%= ActionController::Base.relative_url_root %>/autofill_user_fields.js',
-        data: $(this).closest("form").serializeArray(),
+        url: '<%= Rails.application.routes.url_helpers.autofill_user_fields_path %>',
+        data: $(this).closest("form").serialize(),
         success: (data, textStatus, jqXHR) ->
           $('#users_form').html(data)
           $('#users_form').find("#user_fullname").focus()
@@ -27,7 +26,7 @@ $ ->
     stop: (event, ui) ->
       $.ajax {
         type: 'PUT',
-        url: '<%= ActionController::Base.relative_url_root%>/admin/class_categories/sort.js',
+        url: '<%= Rails.application.routes.url_helpers.sort_class_categories_path %>',
         data: $(this).sortable('serialize')
       }
     opacity: 0.4
@@ -41,7 +40,7 @@ $ ->
     stop: (event, ui) ->
       $.ajax {
         type: 'PUT',
-        url: '<%= ActionController::Base.relative_url_root %>/admin/class_sub_categories/sort.js',
+        url: '<%= Rails.application.routes.url_helpers.sort_class_sub_categories_path %>',
         data: $(this).sortable('serialize')
       }
     opacity: 0.4
@@ -55,7 +54,7 @@ $ ->
     stop: (event, ui) ->
       $.ajax {
         type: 'PUT',
-        url: '<%= ActionController::Base.relative_url_root %>/admin/library_classes/sort.js',
+        url: '<%= Rails.application.routes.url_helpers.sort_library_classes_path %>',
         data: $(this).sortable('serialize')
       }
     opacity: 0.4
@@ -64,11 +63,26 @@ $ ->
   }
   
   # Change sub categories select when category is selected
-  $(document).on 'change', "#new_library_class select[name='library_class[class_category_id]'], #edit_library_class select[name='library_class[class_category_id]']", ->
+  $(document).on 'change', "#new_library_class select[name='library_class[class_category_id]'], .edit_library_class select[name='library_class[class_category_id]']", ->
     $.ajax {
         type: 'POST'
         url: $(this).closest("form").attr("action") + ".js",
         data: $(this).closest("form").serialize()
+    }
+  
+  # Submit expand all function and toggle all collapsibles 
+  $(':checkbox[name=expand_all]').click ->
+    $this = this
+    $.ajax {
+        url: '<%= Rails.application.routes.url_helpers.library_classes_expand_all_path %>'
+        data: "expand_all=" + this.checked
+        success: (data, textStatus, jqXHR) ->
+          if $this.checked
+            $('#admin_list_classes').find(".collapse").collapse('show')
+            $('#admin_list_classes').find("i").removeClass("icon-chevron-right").addClass("icon-chevron-down")
+          else
+            $('#admin_list_classes').find(".collapse").collapse('hide')
+            $('#admin_list_classes').find("i").removeClass("icon-chevron-down").addClass("icon-chevron-right")
     }
   
   # Toggle all click

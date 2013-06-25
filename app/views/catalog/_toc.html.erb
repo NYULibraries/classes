@@ -3,6 +3,18 @@
 	
 	<%= simple_format(sanitize(class_category.head_text, :tags => %w(b strong i em br p a))) %> 
 	
+	<!-- These are classes in the category without a sub category -->
+	<% unless class_category.library_classes.without_sub_category.visible.empty? %>
+	<ul class="no_sub_category_classes_list">
+		<% class_category.library_classes.without_sub_category.visible.each do |library_class| %>
+		<li>
+		<%= link_to sanitize_title(library_class.title), :anchor => library_class.title.parameterize %>
+		</li>	
+		<% end -%>
+	</ul>
+	<% end -%>
+	
+	<!-- These are classes inside sub-categories -->
 	<% unless class_category.class_sub_categories.visible.empty? %>
 		<ul>
 			<!-- Loop through category's sub categories -->
@@ -21,16 +33,7 @@
 		</ul>
 	<% end -%>
 	
-	<!-- These are classes in the category without a sub category -->
-	<% unless class_category.library_classes.without_sub_category.visible.empty? %>
-	<ul class="no_sub_category_classes_list">
-		<% class_category.library_classes.without_sub_category.visible.each do |library_class| %>
-		<li>
-		<%= link_to sanitize_title(library_class.title), :anchor => library_class.title.parameterize %>
-		</li>	
-		<% end -%>
-	</ul>
-	<% end -%>
+
 
 	<%= content_tag(:div, simple_format(sanitize(class_category.foot_text, :tags => %w(b strong i em br p a))), :class => "category_footer") %> 
 </li>

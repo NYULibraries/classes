@@ -20,7 +20,8 @@ class LibraryClassesController < ApplicationController
   def new
     @library_class = LibraryClass.new
     @class_categories = ClassCategory.all
-    @class_sub_categories = []
+    @class_category = ClassCategory.find(params[:library_class][:class_category_id]) unless params[:library_class].blank? or params[:library_class][:class_category_id].blank?
+    @class_sub_categories = (@class_category.nil?) ? [] : @class_category.class_sub_categories
     respond_with(@library_class)
   end
 
@@ -70,5 +71,11 @@ class LibraryClassesController < ApplicationController
       format.js { render :nothing => true }
     end
   end
-
+  
+  # GET /library_classes/expand_all.js?expand_all=(true|false)
+  def expand_all
+    session[:expand_all] = (params[:expand_all] == "true") ? true : false
+    render :nothing => true
+  end
+  
 end
