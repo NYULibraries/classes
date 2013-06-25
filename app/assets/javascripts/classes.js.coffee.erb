@@ -13,7 +13,7 @@ $ ->
   # Autocomplete user form when the username has been filled out
   $('#users_form').on 'blur', '#user_username', -> 
     $.ajax {
-        url: '<%= Rails.application.routes.url_helpers.autofill_user_fields_path %>',
+        url: '<%= ActionController::Base.relative_url_root%><%= Rails.application.routes.url_helpers.autofill_user_fields_path %>',
         data: $(this).closest("form").serialize(),
         success: (data, textStatus, jqXHR) ->
           $('#users_form').html(data)
@@ -26,7 +26,7 @@ $ ->
     stop: (event, ui) ->
       $.ajax {
         type: 'PUT',
-        url: '<%= Rails.application.routes.url_helpers.sort_class_categories_path %>',
+        url: '<%= ActionController::Base.relative_url_root%><%= Rails.application.routes.url_helpers.sort_class_categories_path %>',
         data: $(this).sortable('serialize')
       }
     opacity: 0.4
@@ -40,7 +40,7 @@ $ ->
     stop: (event, ui) ->
       $.ajax {
         type: 'PUT',
-        url: '<%= Rails.application.routes.url_helpers.sort_class_sub_categories_path %>',
+        url: '<%= ActionController::Base.relative_url_root%><%= Rails.application.routes.url_helpers.sort_class_sub_categories_path %>',
         data: $(this).sortable('serialize')
       }
     opacity: 0.4
@@ -54,7 +54,7 @@ $ ->
     stop: (event, ui) ->
       $.ajax {
         type: 'PUT',
-        url: '<%= Rails.application.routes.url_helpers.sort_library_classes_path %>',
+        url: '<%= ActionController::Base.relative_url_root%><%= Rails.application.routes.url_helpers.sort_library_classes_path %>',
         data: $(this).sortable('serialize')
       }
     opacity: 0.4
@@ -74,7 +74,7 @@ $ ->
   $(':checkbox[name=expand_all]').click ->
     $this = this
     $.ajax {
-        url: '<%= Rails.application.routes.url_helpers.library_classes_expand_all_path %>'
+        url: '<%= ActionController::Base.relative_url_root%><%= Rails.application.routes.url_helpers.library_classes_expand_all_path %>'
         data: "expand_all=" + this.checked
         success: (data, textStatus, jqXHR) ->
           if $this.checked
