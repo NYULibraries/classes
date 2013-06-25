@@ -147,7 +147,7 @@ GEM
       require_all (~> 1.2.1)
     ipaddr_range_set (0.10.0)
     journey (1.0.4)
-    jquery-rails (2.2.2)
+    jquery-rails (3.0.1)
       railties (>= 3.0, < 5.0)
       thor (>= 0.14, < 2.0)
     json (1.8.0)
@@ -272,14 +272,14 @@ DEPENDENCIES
   best_in_place (~> 2.1.0)
   better_errors
   binding_of_caller
-  coffee-rails (~> 3.2.1)
+  coffee-rails (~> 3.2.0)
   comma (~> 3.0.4)
   compass-rails (~> 1.0.0)
   compass-susy-plugin (~> 0.9.0)
   coveralls (~> 0.6.2)
   dalli (~> 2.6.2)
   debugger
-  jquery-rails (~> 2.2.1)
+  jquery-rails (~> 3.0.0)
   json (~> 1.8.0)
   kaminari (~> 0.14.1)
   mustache-rails (~> 0.2.3)

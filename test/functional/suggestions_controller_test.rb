@@ -21,7 +21,7 @@ class SuggestionsControllerTest < ActionController::TestCase
   
   test "should create suggestions" do
     assert_difference('Suggestion.count', 1) do
-      get :create, :suggestion => { :suggestion => "create new suggestion" }
+      post :create, :suggestion => { :suggestion => "create new suggestion" }
     end
     
     assert_not_nil assigns(:suggestion)
