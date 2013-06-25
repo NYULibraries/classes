@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class ApplicationDetailsControllers < ActionController::TestCase
+class ApplicationDetailsControllerTest < ActionController::TestCase
   setup :activate_authlogic
 
   def setup
@@ -14,13 +14,12 @@ class ApplicationDetailsControllers < ActionController::TestCase
     assert_template :edit
   end
   
-  test "should update suggestion" do
+  test "should update detail" do
     put :update, :id => ApplicationDetail.first.id, :application_detail => { :the_text => "Change application detail text" }
     
-    assert_equal ApplicationDetail.first.suggestion, "Change application detail text"
-    assert assign(:application_detail)
+    assert_equal ApplicationDetail.first.the_text, "Change application detail text"
+    assert assigns(:application_detail)
     assert_redirected_to library_classes_url
   end
-
 
 end

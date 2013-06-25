@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
   validate :ldap_authenticate
   validates_presence_of :fullname, :email, :phone, :program, :school, :status, :username, :wherefrom
   validates :email, :format => { :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i, :on => :create }
-  validates_associated :registrations
+  #validates_associated :registrations
 
   has_many :registrations, :dependent => :destroy
   has_many :class_dates, :through => :registrations

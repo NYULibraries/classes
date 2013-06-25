@@ -1,0 +1,12 @@
+one:
+  purpose: application_title
+  the_text: Library Instruction Classes
+
+two:
+  purpose: application_head_text
+  the_text: Header text
+
+three:
+  purpose: application_form_text
+  the_text: Form text
+

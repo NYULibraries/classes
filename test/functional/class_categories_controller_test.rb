@@ -63,7 +63,12 @@ class ClassCategoriesControllerTest < ActionController::TestCase
   end
   
   test "should sort class categories" do
+    post :sort, :class_category => [class_categories(:external).id, class_categories(:hidden).id, class_categories(:html).id], :format => :js
     
+    assert_equal ClassCategory.find(class_categories(:external).id).position, 1
+    assert_equal ClassCategory.find(class_categories(:hidden).id).position, 2
+    assert_equal ClassCategory.find(class_categories(:html).id).position, 3
+    assert_not_nil assigns(:class_categories)
   end
 
 end

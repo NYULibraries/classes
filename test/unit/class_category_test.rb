@@ -19,7 +19,7 @@ class ClassCategoryTest < ActiveSupport::TestCase
   
   test "library classes relation" do
     assert_not_empty @class_category.library_classes
-    assert_equal @class_category.library_classes.count, 2
+    assert_equal @class_category.library_classes.count, 5
     @class_category.library_classes.each do |libclass|
       assert_equal libclass.class_category, @class_category
     end

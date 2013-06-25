@@ -4,6 +4,7 @@ regular:
   location: Bobst 101
   position: 1
   class_sub_category: regular
+  class_category: regular
   registration: true
   alt_registration_text: This is alternative text
 
@@ -23,11 +24,13 @@ html:
 hidden: 
   title: Another damn class
   class_sub_category: regular
+  class_category: regular
   visible: false
   
 hidden_parent_sub_cat:
   title: Class on how to teach classes
   class_sub_category: hidden
+  class_category: regular
   visible: true
   
 hidden_parent_cat:
