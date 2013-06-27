@@ -15,9 +15,9 @@ class ApplicationDetailsControllerTest < ActionController::TestCase
   end
   
   test "should update detail" do
-    put :update, :id => ApplicationDetail.first.id, :application_detail => { :the_text => "Change application detail text" }
+    put :update, :id => application_details(:three).id, :application_detail => { :the_text => "Change application detail text" }
     
-    assert_equal ApplicationDetail.first.the_text, "Change application detail text"
+    assert_equal ApplicationDetail.find(application_details(:three).id).the_text, "Change application detail text"
     assert assigns(:application_detail)
     assert_redirected_to library_classes_url
   end

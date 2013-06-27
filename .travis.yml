@@ -6,7 +6,6 @@ services:
 before_script:
   - mysql -e 'create database nyu_classes_test;'
   - bundle exec rake db:schema:load RAILS_ENV=test
-  - rake db:seed RAILS_ENV=test
 
 rvm:
   - "1.9.3"
@@ -14,7 +13,4 @@ rvm:
   
 git:
   submodules: false
-
-notifications:
-  email:
-    - barnaby.alter@nyu.edu
+  
