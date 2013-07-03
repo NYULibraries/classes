@@ -34,6 +34,15 @@ module Views
         return breadcrumbs
       end
       
+      # Using Gauges?
+      def gauges?
+        (Rails.env.eql?("production") and (not gauges_tracking_code.nil?))
+      end
+      
+      def gauges_tracking_code
+        Settings.gauges.tracking_code
+      end
+      
       # Render footer partial
       def footer
         render :partial => 'common/footer'
