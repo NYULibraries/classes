@@ -26,7 +26,7 @@ class UsersController < ApplicationController
     
     admin = (params[:user_attributes].nil?) ? false : (params[:user_attributes][:classes_admin] == "on") ? true : false
     @user.attributes = params[:user]
-    @user.user_attributes = { :classes_admin => admin } unless @user == @current_user
+    @user.user_attributes = { :classes_admin => admin } unless @user == current_user
 
     respond_with(@user) { |format|
       if @user.save
@@ -39,7 +39,7 @@ class UsersController < ApplicationController
   # DELETE /users/1
   def destroy
     @user = User.find(params[:id])
-    unless @current_user == @user
+    unless current_user == @user
       flash[:notice] = t("users.flash.destroy.notice") if @user.destroy 
     else
       flash[:error] = t("users.flash.destroy.error")

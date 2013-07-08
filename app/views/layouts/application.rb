@@ -68,13 +68,13 @@ module Views
       
       # Login link and icon
       def login(params={})
-        (!@current_user.nil?) ? link_to_logout : link_to_login
+        (!current_user.nil?) ? link_to_logout : link_to_login
       end
 
       # Link to logout
       def link_to_logout
         icon_tag(:logout) +
-          link_to("Log-out #{@current_user.firstname}", 
+          link_to("Log-out #{current_user.firstname}", 
             logout_url, class: "logout")
       end
 

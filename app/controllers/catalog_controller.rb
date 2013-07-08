@@ -6,12 +6,12 @@ class CatalogController < ApplicationController
     @class_categories = (params[:class_category_id].blank?) ? ClassCategory.visible : [ClassCategory.find(params[:class_category_id]) ]
     @library_classes = (params[:class_category_id].blank?) ? LibraryClass.visible.non_external.in_order : ClassCategory.find(params[:class_category_id]).library_classes.visible.in_order
 
-    @user = (!@current_user.nil?) ? @current_user : User.new
+    @user = (!current_user.nil?) ? current_user : User.new
     
     @registration = Registration.new
     @suggestion = Suggestion.new
     
-    respond_with(@registration) and return# unless performed?
+    respond_with(@registration) and return unless performed?
   end
   
   # POST /catalog
