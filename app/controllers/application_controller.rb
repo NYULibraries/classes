@@ -14,10 +14,10 @@ class ApplicationController < ActionController::Base
   #helper_method :is_admin?
   #
   def is_admin?
-    if current_user.nil? or current_user.user_attributes.blank? or current_user.user_attributes[:classes_admin].blank?
+    if @current_user.nil? || @current_user.user_attributes.blank? || @current_user.user_attributes[:classes_admin].blank?
       return false
     else
-      return (current_user.user_attributes[:classes_admin] == true)
+      return (@current_user.user_attributes[:classes_admin] == true)
     end
   end
   helper_method :is_admin? 
@@ -27,7 +27,7 @@ class ApplicationController < ActionController::Base
     if is_admin?
       return true
     else
-      redirect_to root_path and return unless performed?
+      redirect_to root_path and return
     end
   end
   
