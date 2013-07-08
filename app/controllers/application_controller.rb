@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
   #helper_method :is_admin?
   #
   def is_admin?
-    if current_user.user_attributes.blank? or current_user.user_attributes[:classes_admin].blank?
+    if current_user.nil? or current_user.user_attributes.blank? or current_user.user_attributes[:classes_admin].blank?
       return false
     else
       return (current_user.user_attributes[:classes_admin] == true)
