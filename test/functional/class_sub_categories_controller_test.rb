@@ -17,6 +17,17 @@ class ClassSubCategoriesControllerTest < ActionController::TestCase
     assert_redirected_to assigns(:class_category)
   end
   
+  test "should not create class subcategory" do
+    assert_no_difference('ClassSubCategory.count') do
+      post :create, :class_sub_category => { :class_category_id => class_categories(:regular).id }
+    end
+    
+    assert_not_nil assigns(:class_sub_category)
+    assert_not_nil assigns(:class_category)
+    assert assigns(:class_sub_category).invalid?
+    assert_redirected_to assigns(:class_category)
+  end
+  
   test "should get edit action" do
     get :edit, :id => ClassSubCategory.find(:first).id
 

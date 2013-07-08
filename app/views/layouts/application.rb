@@ -68,7 +68,7 @@ module Views
       
       # Login link and icon
       def login(params={})
-        (current_user) ? link_to_logout : link_to_login
+        (!current_user.nil?) ? link_to_logout : link_to_login
       end
 
       # Link to logout

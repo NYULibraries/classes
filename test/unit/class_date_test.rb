@@ -69,6 +69,11 @@ class ClassDateTest < ActiveSupport::TestCase
     assert class_date.invalid?
   end
   
+  test "date is properly formatted" do
+    class_date = class_dates(:static_time)
+    assert_equal(class_date.to_formatted_datetime, "Tue., Jul 09 2013 \u2014 05:53PM")
+  end
+  
   test "instructors have to be properly formatted email" do
     class_date = ClassDate.new(@class_date_attrs.merge({:instructors => "dawknjadw"}))
     assert class_date.invalid?

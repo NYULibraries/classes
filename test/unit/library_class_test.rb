@@ -11,7 +11,7 @@ class LibraryClassTest < ActiveSupport::TestCase
   
   test "class dates relation" do
     assert_not_empty @library_class.class_dates
-    assert_equal @library_class.class_dates.count, 13
+    assert_equal @library_class.class_dates.count, 14
     @library_class.class_dates.each do |class_date|
       assert_equal class_date.library_class, @library_class
     end

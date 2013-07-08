@@ -101,3 +101,10 @@ cancelled:
   capacity: 2
   library_class: regular
   instructors:
+
+static_time:
+  the_date: <%= "Tue, 09 Jul 2013 17:53:30 UTC +00:00".to_datetime %>
+  note: 
+  capacity: 2
+  library_class: regular
+  instructors: 
