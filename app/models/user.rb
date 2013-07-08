@@ -50,9 +50,9 @@ class User < ActiveRecord::Base
   # Boolean if user is app admin
   def is_admin?
     if self.user_attributes.blank? or self.user_attributes[:classes_admin].blank?
-      false
+      return false
     else
-      (self.user_attributes[:classes_admin] == true)
+      return (self.user_attributes[:classes_admin] == true)
     end
   end
   
