@@ -9,10 +9,10 @@ class ApplicationController < ActionController::Base
   
   # Filter users to root if not admin
   def authenticate_admin
-    if !is_admin?
-      redirect_to root_path and return unless performed?
-    else
+    if is_admin?
       return true
+    else
+      redirect_to root_path and return unless performed?
     end
   end
   
@@ -24,7 +24,7 @@ class ApplicationController < ActionController::Base
 
   # Return boolean if user is logged out or is admin
   def is_admin?
-    (!current_user.nil? and current_user.is_admin?)
+    (!current_user.nil? && current_user.is_admin?)
   end
   helper_method :is_admin?
 
