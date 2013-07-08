@@ -49,13 +49,13 @@ class User < ActiveRecord::Base
   
   # Boolean if user is app admin
   def is_admin?
-    Proc.new {
-      if self.user_attributes.blank? or self.user_attributes[:classes_admin].blank?
+    lambda do
+      if user_attributes.blank? or user_attributes[:classes_admin].blank?
         return false
       else
-        return (self.user_attributes[:classes_admin] == true)
+        return (user_attributes[:classes_admin] == true)
       end
-    }
+    end
   end
   
 private
