@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
   attr_accessible :crypted_password, :current_login_at, :current_login_ip, :email, :firstname, :last_login_at, :last_login_ip, :last_request_at, :lastname, :login_count, :mobile_phone, :password_salt, :persistence_token, :refreshed_at, :session_id, :user_attributes
 
   validate :ldap_authenticate
-  validates_presence_of :fullname, :email, :phone, :program, :school, :status, :username, :wherefrom, :unless => :is_admin?
+  validates_presence_of :fullname, :email, :phone, :program, :school, :status, :username, :wherefrom, :unless => lambda { :is_admin? }
   validates :email, :format => { :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i, :on => :create }
   #validates_associated :registrations
 
@@ -49,12 +49,10 @@ class User < ActiveRecord::Base
   
   # Boolean if user is app admin
   def is_admin?
-    lambda do
-      if user_attributes.blank? or user_attributes[:classes_admin].blank?
-        return false
-      else
-        return (user_attributes[:classes_admin] == true)
-      end
+    if user_attributes.blank? or user_attributes[:classes_admin].blank?
+      return false
+    else
+      return (user_attributes[:classes_admin] == true)
     end
   end
   

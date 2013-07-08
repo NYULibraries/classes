@@ -26,7 +26,6 @@ group :assets do
 end
 
 group :development do 
-  gem 'debugger'
   gem "better_errors"
   gem "binding_of_caller"
 end
@@ -40,6 +39,8 @@ group :test do
   gem "vcr", "~> 2.5.0"
   gem "webmock", "~> 1.11.0"
 end
+
+gem 'debugger', :groups => [:test, :development]
 
 gem 'authpds-nyu', "~> 0.2.12"
 gem 'jquery-rails', "~> 2.2.1"
