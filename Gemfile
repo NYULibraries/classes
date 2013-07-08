@@ -40,7 +40,7 @@ group :test do
   gem "webmock", "~> 1.11.0"
 end
 
-gem 'debugger', :groups => [:test, :development]
+gem 'debugger'#, :groups => [:test, :development]
 
 gem 'authpds-nyu', "~> 0.2.12"
 gem 'jquery-rails', "~> 2.2.1"
