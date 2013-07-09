@@ -1,11 +1,12 @@
 class User < ActiveRecord::Base
  
-  attr_accessible :fullname, :email, :username, :phone, :program, :school, :status, :wherefrom
-  attr_accessible :crypted_password, :current_login_at, :current_login_ip, :email, :firstname, :last_login_at, :last_login_ip, :last_request_at, :lastname, :login_count, :mobile_phone, :password_salt, :persistence_token, :refreshed_at, :session_id, :user_attributes
+  attr_accessible :fullname, :username, :phone, :program, :school, :status, :wherefrom,
+                  :crypted_password, :current_login_at, :current_login_ip, :email, :firstname, 
+                  :last_login_at, :last_login_ip, :last_request_at, :lastname, :login_count, 
+                  :mobile_phone, :password_salt, :persistence_token, :refreshed_at, :session_id, :user_attributes
 
   validate :ldap_authenticate
-  validates_presence_of :fullname, :email, :phone, :program, :school, :status, :username
-  validates_presence_of :wherefrom, :unless => :is_admin?
+  validates_presence_of :fullname, :phone, :program, :school, :status, :username, :wherefrom
   validates :email, :format => { :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i, :on => :create }
 
   has_many :registrations, :dependent => :destroy

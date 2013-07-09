@@ -6,6 +6,19 @@ namespace :cleanup do
       User.non_admin.inactive.destroy_all
     end
     
+    desc "Resave all existing users to resolve a bug; should only have to be done once at migration time"
+    task :existing_users => :environment do
+      User.all.each do |user|
+        begin
+          user.save!
+        rescue Exception => e
+          puts "Failed to save due to #{e}\n"
+          puts "Deleting user #{user.username} last updated at #{user.updated_at}\n\n"
+          user.destroy
+        end
+      end
+    end
+    
     desc "Add User relation to suggestion where username exists"
     task :suggestions => :environment do
       @suggestions = Suggestion.where("username IS NOT NULL")

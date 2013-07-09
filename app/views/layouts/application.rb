@@ -1,4 +1,4 @@
-# app/views/layouts/bobcat.rb
+# app/views/layouts/application.rb
 module Views
   module Layouts
     class Application < ActionView::Mustache
@@ -34,18 +34,8 @@ module Views
         return breadcrumbs
       end
       
-      # Using Gauges?
-      def gauges?
-        (Rails.env.eql?("production") and (not gauges_tracking_code.nil?))
-      end
-      
       def gauges_tracking_code
         Settings.gauges.tracking_code
-      end
-      
-      # Render footer partial
-      def footer
-        render :partial => 'common/footer'
       end
       
       # Prepend modal dialog elements to the body
