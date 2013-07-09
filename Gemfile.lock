@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/NYULibraries/nyulibraries_assets.git
-  revision: 6f37a0fbc810ead83c136e8a380c139ea0730e67
+  revision: 1994439f56a8d8f6a54e53ecbb8dc01cd7fc9213
   tag: v1.1.9
   specs:
     nyulibraries_assets (1.1.9)
