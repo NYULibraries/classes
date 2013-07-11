@@ -315,6 +315,7 @@ DEPENDENCIES
   newrelic_rpm (~> 3.6.0)
   nyulibraries_assets!
   rails (~> 3.2.13)
+  rails_config (~> 0.3.2)
   rake (~> 10.0.4)
   rake_nyu!
   ruby-prof

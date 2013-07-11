@@ -49,6 +49,7 @@ gem 'acts-as-taggable-on', '~> 2.4.0'
 
 # Deploy with Capistrano
 gem "rake_nyu", :git => "git://github.com/NYULibraries/rake_nyu.git"
+gem "rails_config", "~> 0.3.2"
 
 gem "sorted", "~> 0.4.3"
 gem "kaminari", "~> 0.14.1"
