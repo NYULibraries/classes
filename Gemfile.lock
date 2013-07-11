@@ -11,11 +11,20 @@ GIT
 
 GIT
   remote: git://github.com/NYULibraries/rake_nyu.git
-  revision: ac5c6e60209e10067348da0f4a89a998dd07a45a
+  revision: 7cf4dcf8071555279a78b568b748f892397c2b98
   specs:
     rake_nyu (1.0.0)
+      cap_git_tools (~> 0.9.1)
+      capistrano (~> 2.15.5)
+      capistrano-tagging (~> 0.1.0)
+      git (~> 1.2.5)
+      mail (~> 2.5.4)
+      octokit (~> 1.25.0)
+      rails (~> 3.2.13)
+      rails_config (~> 0.3.2)
       rake (~> 10.0.4)
       require_all (~> 1.2.1)
+      rvm-capistrano (~> 1.4.0)
 
 GEM
   remote: https://rubygems.org/
@@ -78,14 +87,16 @@ GEM
     bootstrap-sass (2.3.1.0)
       sass (~> 3.2)
     builder (3.0.4)
-    capistrano (2.15.0)
+    cap_git_tools (0.9.1)
+      capistrano (~> 2.0)
+    capistrano (2.15.5)
       highline
       net-scp (>= 1.0.0)
       net-sftp (>= 2.0.0)
       net-ssh (>= 2.0.14)
       net-ssh-gateway (>= 1.1.0)
-    capistrano-ext (1.2.1)
-      capistrano (>= 1.0.0)
+    capistrano-tagging (0.1.0)
+      capistrano (~> 2.0)
     chunky_png (1.2.8)
     coderay (1.0.9)
     coffee-rails (3.2.2)
@@ -133,8 +144,13 @@ GEM
       nokogiri (~> 1.5.6)
       rake (~> 10.0.3)
       require_all (~> 1.2.1)
+    faraday (0.8.7)
+      multipart-post (~> 1.1)
+    faraday_middleware (0.9.0)
+      faraday (>= 0.7.4, < 0.9)
     fssm (0.2.10)
     git (1.2.5)
+    hashie (2.0.5)
     highline (1.6.19)
     hike (1.2.3)
     httparty (0.10.2)
@@ -160,10 +176,11 @@ GEM
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
-    marc (0.5.0)
+    marc (0.5.1)
     mime-types (1.23)
     multi_json (1.7.7)
     multi_xml (0.5.4)
+    multipart-post (1.2.0)
     mustache (0.99.4)
     mustache-rails (0.2.3)
       actionpack (>= 3.1)
@@ -177,8 +194,16 @@ GEM
     net-ssh (2.6.8)
     net-ssh-gateway (1.2.0)
       net-ssh (>= 2.6.5)
+    netrc (0.7.7)
     newrelic_rpm (3.6.5.130)
     nokogiri (1.5.10)
+    octokit (1.25.0)
+      addressable (~> 2.2)
+      faraday (~> 0.8)
+      faraday_middleware (~> 0.9)
+      hashie (~> 2.0)
+      multi_json (~> 1.3)
+      netrc (~> 0.7.7)
     open4 (1.3.0)
     polyglot (0.3.3)
     pr_geohash (1.0.0)
@@ -216,7 +241,7 @@ GEM
     rsolr (1.0.9)
       builder (>= 2.1.2)
     ruby-prof (0.13.0)
-    rvm-capistrano (1.3.0)
+    rvm-capistrano (1.4.0)
       capistrano (>= 2.0.0)
     safe_yaml (0.9.4)
     sass (3.2.9)
@@ -274,8 +299,6 @@ DEPENDENCIES
   best_in_place (~> 2.1.0)
   better_errors
   binding_of_caller
-  capistrano (= 2.15.0)
-  capistrano-ext (= 1.2.1)
   coffee-rails (~> 3.2.1)
   comma (~> 3.0.4)
   compass-rails (~> 1.0.0)
@@ -292,11 +315,9 @@ DEPENDENCIES
   newrelic_rpm (~> 3.6.0)
   nyulibraries_assets!
   rails (~> 3.2.13)
-  rails_config (~> 0.3.2)
   rake (~> 10.0.4)
   rake_nyu!
   ruby-prof
-  rvm-capistrano (= 1.3.0)
   sass-rails (~> 3.2.3)
   simple_form (~> 2.1.0)
   simplecov
