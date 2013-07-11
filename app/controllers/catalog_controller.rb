@@ -7,7 +7,7 @@ class CatalogController < ApplicationController
     @library_classes = (params[:class_category_id].blank?) ? LibraryClass.visible.non_external.in_order : ClassCategory.find(params[:class_category_id]).library_classes.visible.in_order
 
     @user = (!current_user.nil?) ? current_user : User.new
-    
+
     @registration = Registration.new
     @suggestion = Suggestion.new
     

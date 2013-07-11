@@ -1,17 +1,6 @@
 # Methods added to this helper will be available to all templates in the application.
 module ApplicationHelper
   
-  # Stylesheets include helper
-  def catalog_stylesheets
-    catalog_stylesheets = stylesheet_link_tag "http://fonts.googleapis.com/css?family=Muli"
-    catalog_stylesheets += stylesheet_link_tag "application"
-  end
-  
-  # Javascripts include helper
-  def catalog_javascripts
-    catalog_javascripts = javascript_include_tag "application"
-  end
-  
   def format_class_date_title(class_date)
     "#{format_class_date_datetime(class_date)} #{class_date.note} #{(class_date.cancelled?) ? '<span class="cancelled">Cancelled</span>' : ''} #{(class_date.full?) ? '<span class="full">Full</span>' : ''}".html_safe
   end

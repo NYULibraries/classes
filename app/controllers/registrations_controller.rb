@@ -1,12 +1,6 @@
 class RegistrationsController < ApplicationController
-  before_filter :authenticate_admin, :except => :create
+  before_filter :authenticate_admin
   respond_to :html, :js
-  
-  # GET /registrations/1/edit
-  def edit
-    @registration = Registration.find(params[:id])
-    respond_with(@registration)
-  end
   
   # PUT /registrations/1
   def update

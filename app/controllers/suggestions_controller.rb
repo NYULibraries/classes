@@ -1,5 +1,5 @@
 class SuggestionsController < ApplicationController
-  before_filter :authenticate_admin, :except => [:create]
+  before_filter :authenticate_admin
   respond_to :html, :js, :csv
   
   # List suggestions with sort and search options

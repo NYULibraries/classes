@@ -6,6 +6,12 @@ real_user:
   persistence_token: <%= Authlogic::Random.hex_token %>
   firstname: Walrus J.
   lastname: Lennon
+  fullname: Walrus J. Lennon
+  phone: 12345
+  program: CompSci
+  school: NYU School
+  status: Junior
+  wherefrom: Professor
   user_attributes: <%= {
     :nyuidn => "DS34D", 
     :primary_institution => "INST01",
@@ -53,6 +59,12 @@ nonadmin1:
   crypted_password: <%= Authlogic::CryptoProviders::Sha512.encrypt(username + salt) %>
   persistence_token: <%= Authlogic::Random.hex_token %>
   email: <%= username + "@university.edu" %>
+  fullname: Walrus J. Lennon
+  phone: 12345
+  program: CompSci
+  school: NYU School
+  status: Junior
+  wherefrom: Professor
   firstname: John
   lastname: Smith
     

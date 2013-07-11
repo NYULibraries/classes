@@ -22,10 +22,10 @@ class ResponseEmailsControllerTest < ActionController::TestCase
   end
   
   test "should update email" do
-    put :update, :id => ResponseEmail.first.id, :response_email => { :body => "Change body" }
+    put :update, :id => response_emails(:one).id, :response_email => { :body => "Change body" }
     
-    #assert_equal ResponseEmail.first.body, "Change body"
-    #assert assigns(:response_email)
+    #assert_equal ResponseEmail.find(response_emails(:one).id).body, "Change body"
+    assert assigns(:response_email)
     #assert_redirected_to response_emails_url
   end
   
@@ -35,6 +35,5 @@ class ResponseEmailsControllerTest < ActionController::TestCase
     assert assigns(:response_email)
     assert_template :edit
   end
-  
 
 end

@@ -2,4 +2,16 @@ one:
   purpose: follow_up
   subject: The subj
   body: Thank you
+  reply_to: noreply@library.nyu.edu
 
+auto_response:
+  purpose: auto_response
+  subject: Subject
+  body: You've registered
+  reply_to: noreply@library.nyu.edu
+
+follow_up:
+  purpose: follow_up
+  subject: Follow Up Subject
+  body: Follow up
+  reply_to: noreply@library.nyu.edu

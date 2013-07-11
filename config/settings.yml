@@ -17,3 +17,6 @@ secret_token: 'eb7aded9f022e3ed276ab7044a15656ed032d677a3db9d1d609e86d9391209ada
   
 cookie: 
   domain: ".local"
+
+gauges:
+  tracking_code: dummy_dumbdumb

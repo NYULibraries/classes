@@ -51,6 +51,7 @@ class ClassDatesController < ApplicationController
   def send_follow_up
     @class_date = ClassDate.find(params[:class_date])
     @registrations = @class_date.registrations
+
     flash[:notice] = t("class_dates.flash.send_follow_up.notice") if RegistrationMailer.follow_up_email(ResponseEmail.new(params[:response_email]), @registrations).deliver
     respond_with(@class_date)
   end

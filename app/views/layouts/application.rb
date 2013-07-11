@@ -14,16 +14,6 @@ module Views
         t("application_title")
       end
       
-      # Stylesheets to include in layout
-      def stylesheets
-        catalog_stylesheets
-      end
-      
-      # Javascripts to include in layout
-      def javascripts
-        catalog_javascripts
-      end
-            
       # Print breadcrumb navigation
       def breadcrumbs
         breadcrumbs = [link_to("NYU Libraries", "https://library.nyu.edu")]

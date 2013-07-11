@@ -62,11 +62,11 @@ class ClassDatesControllerTest < ActionController::TestCase
   end
   
   test "should send follow up email" do
-    #post :send_follow_up, :class_date => class_dates(:one).id
-    #
-    #assert_not_nil assigns(:class_date)
-    #assert_not_nil assigns(:registrations)
-    #assert_redirected_to assigns(:class_date)
+    post :send_follow_up, :class_date => class_dates(:one).id, :response_email => {:body => "Follow up", :subject => "Follow up subject"}
+    
+    assert_not_nil assigns(:class_date)
+    assert_not_nil assigns(:registrations)
+    assert_redirected_to assigns(:class_date)
   end
 
 end
