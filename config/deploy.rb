@@ -1,4 +1,4 @@
-require "capistrano-nyu"
+require 'capistrano-nyu'
 
 set(:app_title) { "classes" } unless exists?(:app_title)
 set(:application) { "#{app_title}_repos" }
